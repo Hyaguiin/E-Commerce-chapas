@@ -1,6 +1,6 @@
 // src/components/register/register.jsx
 import React, { useState } from 'react';
-import '../../components/register/register.scss'
+import '../../components/register/register.scss';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -8,12 +8,11 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [role, setRole] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Adicione sua lógica de envio aqui, como uma requisição para um API.
-        console.log('Dados do registro:', { name, surname, email, password, confirmPassword, role });
+        // Adicione sua lógica de envio aqui, como uma requisição para uma API.
+        console.log('Dados do registro:', { name, surname, email, password, confirmPassword });
     };
 
     return (
@@ -23,18 +22,16 @@ const Register = () => {
                     <div className="container-name">
                         <img 
                             className="logoFacisa" 
-                            src="https://upload.wikimedia.org/wikipedia/commons/6/66/Unifacisabasquete.png" 
+                            src="https://cdn3d.iconscout.com/3d/premium/thumb/diamante-dourado-10703026-8796428.png" 
                             alt="Logo Facisa" 
                         />
-                        <h1>Gestão <span className="cor">Nupex</span></h1>
+
+                        <h1 className='whiteBelt'>White<span className="cor">Belt</span></h1>
                     </div>
                 </div>
-                <h2>Bem-vindo ao Nupex!</h2>
-                <p>
-                    Transforme a gestão dos seus projetos educacionais com o Nupex, a
-                    plataforma completa para coordenadores e professores.
-                </p>
-  
+                <h2>Bem-vindo ao White Belt!</h2>
+                <p>Venda de produtos de Grife</p>
+
                 <form onSubmit={handleSubmit}>
                     <div className="input-group-nome">
                         <div className="input-group">
@@ -45,6 +42,7 @@ const Register = () => {
                                 placeholder="Nome" 
                                 value={name} 
                                 onChange={(e) => setName(e.target.value)} 
+                                required 
                             />
                         </div>
                         
@@ -56,31 +54,11 @@ const Register = () => {
                                 placeholder="Sobrenome" 
                                 value={surname} 
                                 onChange={(e) => setSurname(e.target.value)} 
+                                required 
                             />
                         </div>
                     </div>
-  
-                    <div className="radio-group">
-                        <label>
-                            <input 
-                                type="radio" 
-                                name="cargo" 
-                                value="coordenador" 
-                                onChange={(e) => setRole(e.target.value)} 
-                            />
-                            Coordenador
-                        </label>
-                        <label>
-                            <input 
-                                type="radio" 
-                                name="cargo" 
-                                value="professor" 
-                                onChange={(e) => setRole(e.target.value)} 
-                            />
-                            Professor
-                        </label>
-                    </div>
-  
+
                     <div className="input-group">
                         <label htmlFor="email">Seu Email</label>
                         <input 
@@ -89,9 +67,10 @@ const Register = () => {
                             placeholder="Email@mail.com" 
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
+                            required 
                         />
                     </div>
-  
+
                     <div className="input-group-senha">
                         <div className="input-group">
                             <label htmlFor="senha">Senha</label>
@@ -101,6 +80,7 @@ const Register = () => {
                                 placeholder="Sua Senha" 
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)} 
+                                required 
                             />
                         </div>
         
@@ -112,25 +92,28 @@ const Register = () => {
                                 placeholder="Sua Senha" 
                                 value={confirmPassword} 
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
+                                required 
                             />
                         </div>
                     </div>
-  
+
                     <div className="terms">
                         <input type="checkbox" id="termos" required />
                         <label htmlFor="termos">
                             Eu aceito os <a href="#" className="link">Termos e Condições</a>
                         </label>
                     </div>
-  
-                    <button type="submit" className="btn-primary">Cadastrar</button>
-  
+
+                    <button type="submit" className="btn-primary">
+                        <span className='cadastrar'>Cadastrar</span>
+                    </button>
+
                     <p>Já tem uma conta? <a href="#" className="link">Entrar</a></p>
                 </form>
             </div>
-  
+
             <div className="image-container">
-                <img src="../../../assets/img/nupex.PNG" alt="Exemplo Nupex" />
+                <img src="https://cdn.shopify.com/s/files/1/0665/0308/2220/files/Peaky_Blinders_Blog_600x600.webp?v=1687809959" alt="Exemplo Grife" />
             </div>
         </div>
     );

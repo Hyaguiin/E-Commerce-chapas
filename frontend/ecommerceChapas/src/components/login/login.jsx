@@ -19,7 +19,7 @@ const Login = () => {
                         <img
                             className="login-logoFacisa"
                             src="https://cdn3d.iconscout.com/3d/premium/thumb/diamante-dourado-10703026-8796428.png"
-                            alt="Logo Facisa"
+                            alt="Logo WhiteBelt"
                         />
                         <h1 className="login-whiteBelt"> White <span className="login-cor"> Belt</span></h1>
                     </div>
