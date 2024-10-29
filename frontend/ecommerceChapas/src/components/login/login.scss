@@ -66,13 +66,13 @@ p {
 
 .login-input-group-senha {
     display: flex;
-    width: 820px;
+    width: 100%;
     justify-content: space-between;
     gap: 20px;
 }
 
 #login-email {
-    width: 800px;
+    width: 100%;
 }
 
 .login-input-group {
@@ -92,9 +92,9 @@ p {
 }
 
 .login-input-group input:focus {
-    border-color: #86c2ec;
-    background-color: #e9f5fd;
-    box-shadow: 0 0 5px rgba(134, 194, 236, 0.5);
+    border-color: #ece586;
+    background-color: #fdfae9;
+    box-shadow: 0 0 5px rgba(236, 229, 134, 0.5);
 }
 
 .login-terms {
@@ -109,7 +109,7 @@ p {
 
 .login-btn-primary {
     display: inline-block;
-    width: 96%;
+    width: 100%;
     padding: 15px;
     background-color: rgb(0, 0, 0);
     color: white;
@@ -117,6 +117,7 @@ p {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    margin: 20px 0;
 }
 
 .login-entrar {
@@ -143,4 +144,24 @@ p {
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .ubuntu-bold {
+        font-size: 18px; /* Ajuste do tamanho da fonte */
+    }
+
+    .login-form-container {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .login-input-group-senha {
+        flex-direction: column;
+    }
+
+    .login-image-container {
+        display: none; /* Esconde a imagem em telas pequenas */
+    }
 }
