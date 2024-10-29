@@ -1,5 +1,5 @@
 'use client'
-
+import '../../components/header/header.scss';
 import { useState } from 'react'
 import {
   Dialog,
@@ -40,7 +40,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white custom-shadow"> {/* Adicionando a classe custom-shadow */}
+    <header className="header">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
@@ -49,7 +49,7 @@ export default function Header() {
               alt=""
               src="https://cdn3d.iconscout.com/3d/premium/thumb/diamante-dourado-10703026-8796428.png"
               className="h-8 w-auto"
-            />
+            /> <h1 className='whiteBelt'>White<span className="cor">Belt</span></h1>
           </a>
         </div>
         <div className="flex lg:hidden">
