@@ -3,6 +3,8 @@ import './App.css';
 import Login from './components/login/login.jsx';
 import Home from './components/home/home.jsx';
 import Register from './components/register/register.jsx';
+import ProductView from './components/productView/productView.jsx';
+import ChicoView from './components/productView/chicoView.jsx';
 
 function App() {
   return (
@@ -13,6 +15,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/productView" element={<ProductView />} />
+          <Route path="/chicoView" element={<ChicoView />} />
+          
+
         </Routes>
       </div>
     </Router>

@@ -35,12 +35,12 @@ const products = [
   },
   {
     id: 3,
-    name: 'Navy Blue Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-03.jpg',
+    name: 'Eu Tenteeei',
+    href: '/chicoView',
+    imageSrc: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lxtyj7s3s42a69',
     imageAlt: "Front of men's Navy Blue Tee.",
-    price: '$32',
-    color: 'Navy',
+    price: '$50',
+    color: 'Gray',
   },
   {
     id: 4,
@@ -117,8 +117,8 @@ const products = [
   {
     id: 12,
     name: 'Yujiro T-Shirt',
-    href: '#',
-    imageSrc: 'https://apollogearclub.com.br/cdn/shop/files/camisa-oversized-baki-v2-pp-668c2e0976742-large.jpg?v=1722355383',
+    href: '/productView',
+    imageSrc: 'https://images-americanas.b2w.io/produtos/7473497060/imagens/camiseta-yujiro-hanma-baki/7473497068_1_large.jpg',
     imageAlt: "The strongst Man in the World.",
     price: '$50',
     color: 'Brown',

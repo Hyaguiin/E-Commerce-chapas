@@ -107,7 +107,7 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="" className="text-sm/6 font-semibold text-gray-900">
             Features
           </a>
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
@@ -118,8 +118,8 @@ export default function Header() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
+          <a href="/" className="text-sm/6 font-semibold text-gray-900">
+            Logout <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>

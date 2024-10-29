@@ -30,8 +30,7 @@ const Register = () => {
                     </div>
                 </div>
                 <h2>Bem-vindo ao White Belt!</h2>
-                <p>Venda de produtos de Grife</p>
-
+                <p>Estilo e Elegância a Cada Passo</p>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group-nome">
                         <div className="input-group">
