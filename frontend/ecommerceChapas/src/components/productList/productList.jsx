@@ -96,44 +96,69 @@ const products = [
     price: '$34',
     color: 'Brown',
   },
+  {
+    id: 10,
+    name: 'Zoro OnePiece T-Shirt',
+    href: '#',
+    imageSrc: 'https://img.ltwebstatic.com/images3_spmp/2024/02/14/ca/1707842572b90e0fcaaefd0eb45a2e155a2a2d86ed_thumbnail_720x.jpg',
+    imageAlt: "Three Sword hand man.",
+    price: '$24',
+    color: 'green',
+  },
+  {
+    id: 11,
+    name: 'Mia Khalifa Legends',
+    href: '#',
+    imageSrc: 'https://down-br.img.susercontent.com/file/sg-11134201-7rbm3-lmx7g8pjzvm8e8',
+    imageAlt: "I don't know she who's.",
+    price: '$58',
+    color: 'Brown',
+  },
+  {
+    id: 12,
+    name: 'Yujiro T-Shirt',
+    href: '#',
+    imageSrc: 'https://apollogearclub.com.br/cdn/shop/files/camisa-oversized-baki-v2-pp-668c2e0976742-large.jpg?v=1722355383',
+    imageAlt: "The strongst Man in the World.",
+    price: '$50',
+    color: 'Brown',
+  }
 ]
   
   export default function ProductList() {
-    return (
-      <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-  
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    alt={product.imageAlt}
-                    src={product.imageSrc}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                  </div>
-                  <p className="text-sm font-medium text-gray-900">{product.price}</p>
-                </div>
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <div key={product.id} className="group relative border border-gray-300 rounded-md p-4 shadow-md hover:shadow-lg">
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                <img
+                  alt={product.imageAlt}
+                  src={product.imageSrc}
+                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                />
               </div>
-            ))}
-          </div>
-          
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href={product.href}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      {product.name}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">{product.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
+  );
+}
 
-      
-    )
-  }
   
