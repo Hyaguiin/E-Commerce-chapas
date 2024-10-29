@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../../components/header/header.jsx';
 import ProductList from '../productList/productList.jsx';
 import { Dialog, Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/react';
+import Footer from '../footer/footer.jsx';
 
 
 
@@ -13,6 +14,7 @@ const Home = () => {
     
         <Header />
         <ProductList></ProductList>
+        <Footer></Footer>
         <div>
         
         </div>

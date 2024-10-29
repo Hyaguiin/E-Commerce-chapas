@@ -5,7 +5,7 @@ import Home from './components/home/home.jsx';
 import Register from './components/register/register.jsx';
 import ProductView from './components/productView/productView.jsx';
 import ChicoView from './components/productView/chicoView.jsx';
-
+{/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
   return (
     <Router>
