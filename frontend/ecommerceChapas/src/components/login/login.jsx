@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../components/login/login.scss';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Email:', email, 'Password:', password);
-        // Adicionar lógica de autenticação aqui
+        if (email && password) {
+            console.log('Email:', email, 'Password:', password);
+            navigate('/home'); // Redireciona para a página /home
+        } else {
+            alert('Por favor, preencha todos os campos.');
+        }
     };
 
     return (
@@ -25,9 +31,7 @@ const Login = () => {
                     </div>
                 </div>
                 <h2>Bem-vindo ao White Belt!</h2>
-                <p>
-                    Venda de produtos de Grife
-                </p>
+                <p>Venda de produtos de Grife</p>
 
                 <form onSubmit={handleSubmit}>
                     <div className="login-input-group" id="login-email">
@@ -62,10 +66,10 @@ const Login = () => {
                     </div>
 
                     <button type="submit" className="login-btn-primary">
-                        <span className='login-entrar'>Entrar </span>
+                        <span className='login-entrar'>Entrar</span>
                     </button>
 
-                    <p>Ainda não é registrado? <a href="#" className="login-link">Crie uma conta</a></p>
+                    <p>Ainda não é registrado? <a href="/register" className="login-link">Crie uma conta</a></p>
                 </form>
             </div>
 
