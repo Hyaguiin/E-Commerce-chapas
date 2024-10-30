@@ -9,6 +9,30 @@ const AboutUs = () => {
         'https://img.freepik.com/fotos-premium/cavalo-mustang-preto-lindo-cavalo-equestre-simbolo-de-liberdade-gerar-ai_98402-89736.jpg', // Cavalo
     ];
 
+    // Informações da equipe
+    const teamMembers = [
+        {
+            name: 'Thomile Chelbo',
+            role: 'Agiota',
+            img: 'https://conteudo.imguol.com.br/c/parceiros/5b/2021/09/28/criador-de-peaky-blinders-queria-astro-de-os-mercenarios-como-thomas-shelby-1632868757942_v2_450x600.jpg', // Substitua pela imagem real
+        },
+        {
+            name: 'Artu Xelbe',
+            role: 'Vice Marido',
+            img: 'https://fly.metroimg.com/upload/q_85,w_700/https://uploads.metroimg.com/wp-content/uploads/2024/01/31114943/Paul-Anderson-Arthur-Shelby-Peaky-blinders.jpg', // Substitua pela imagem real
+        },
+        {
+            name: 'Cleito Rasta',
+            role: 'Dj do Baile Chernobyl',
+            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRNRxZBzlyJP-FnAatFVkuh-t9WiR31Snedw&s', // Substitua pela imagem real
+        },
+        {
+            name: 'Chicoins',
+            role: 'Nem Tenteeei!!!',
+            img: 'https://s2-g1.glbimg.com/6bGVrLKBYj18TqdzbOqXpHG0t0A=/0x0:755x578/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/F/D/C9TdGTRX6NXnaALACp0g/chico.jpg', // Substitua pela imagem real
+        },
+    ];
+
     return (
         <div className="container mx-auto px-6 py-10">
             {/* Seção de Introdução */}
@@ -44,7 +68,9 @@ const AboutUs = () => {
             </div>
 
             {/* Seção de Estilo de Vida */}
-            <h2 className="text-3xl font-semibold text-center mb-6">Nosso Estilo de Vida</h2>
+            <h2 className="text-3xl font-semibold text-center mb-6" style={{ color: 'rgb(0, 0, 0)' }}>
+                Nosso Estilo de Vida
+            </h2>
             <div className="flex flex-col md:flex-row md:space-x-10 mb-10">
                 <div className="flex-1 max-w-md mb-4">
                     <h3 className="text-xl font-bold mb-2">Charutos</h3>
@@ -54,7 +80,7 @@ const AboutUs = () => {
                     <img src={images[0]} alt="Charuto" className="w-full h-64 object-cover rounded shadow-lg" />
                 </div>
                 <div className="flex-1 max-w-lg mb-4"> 
-                    <h3 className="text-xl font-bold mb-2">Whisky</h3>
+                    <h3 className="text-xl font-bold mb-2" >Whisky</h3>
                     <p className="text-gray-600 mb-4">
                         Apresentamos uma coleção de whiskies de alta qualidade, cada um com uma história única, perfeita para momentos especiais.
                     </p>
@@ -68,6 +94,26 @@ const AboutUs = () => {
                     <img src={images[2]} alt="Cavalo" className="w-full h-64 object-cover rounded shadow-lg" />
                 </div>
             </div>
+
+           
+{/* Seção da Equipe */}
+<h2 className="text-3xl font-semibold text-center mb-6" style={{ color: 'rgb(232, 202, 5)' }}>
+    Nossa Equipe
+</h2>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
+    {teamMembers.map((member, index) => (
+        <div key={index} className="p-6 bg-white rounded-lg shadow-lg">
+            <img
+                src={member.img}
+                alt={member.name}
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" // Definindo w-32 e h-32 para tamanhos fixos
+                style={{ objectFit: 'cover' }} // Garantindo que a imagem seja cortada para se ajustar ao contêiner
+            />
+            <h3 className="font-bold text-xl">{member.name}</h3>
+            <p className="text-gray-600">{member.role}</p>
+        </div>
+    ))}
+</div>
 
             {/* Botão de Ação */}
             <div className="mt-10 text-center">
