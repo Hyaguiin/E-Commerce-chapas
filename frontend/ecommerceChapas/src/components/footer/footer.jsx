@@ -4,13 +4,13 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <h2 className="text-lg font-semibold">Sobre Nós</h2>
+              <h2 className="text-lg font-semibold" style={{ color: 'rgb(232, 202, 5)' }} >Sobre Nós</h2>
               <p className="mt-2 text-sm">
                 Somos uma loja dedicada a oferecer as melhores camisetas, com design exclusivo e qualidade excepcional.
               </p>
             </div>
             <div>
-              <h2 className="text-lg font-semibold">Links Rápidos</h2>
+              <h2 className="text-lg font-semibold" style={{ color: 'rgb(232, 202, 5)' }}>Links Rápidos</h2>
               <ul className="mt-2 space-y-2">
                 <li>
                   <a href="#" className="text-gray-400 hover:text-white">Início</a>
@@ -27,7 +27,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="text-lg font-semibold">Siga-nos</h2>
+              <h2 className="text-lg font-semibold" style={{ color: 'rgb(232, 202, 5)' }}>Siga-nos</h2>
               <div className="flex space-x-4 mt-2">
                 <a href="#" className="text-gray-400 hover:text-white">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
