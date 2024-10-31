@@ -111,8 +111,10 @@ export default function Header() {
           <a href="/whiskies" className="changecolor text-sm font-semibold text-gray-900">Whisky</a>
           <a href="/charutos" className="changecolor text-sm font-semibold text-gray-900">Charutos</a>
           <a href="/cavalos" className="changecolor text-sm font-semibold text-gray-900">Cavalos</a>
+          <a href="/promocoes" className="changecolor text-sm font-semibold text-gray-900">Promoções</a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          
           <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
           <a href="/" className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
@@ -183,8 +185,8 @@ export default function Header() {
                 <a href="/profile" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
                   Profile
                 </a>
-                <a href="#" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
-                  Log in
+                <a href="/login" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
+                  Log out
                 </a>
               </div>
             </div>

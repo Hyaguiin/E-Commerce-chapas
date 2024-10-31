@@ -9,6 +9,7 @@ import CavaloList from './components/productList/cavalo.jsx';
 import CharutoList from './components/productList/charuto.jsx';
 import WhiskyList from './components/productList/whisky.jsx';
 import ProfileSettings from './components/profileSettings/profileSettings.jsx';
+import Cart from './components/cart/cart.jsx';
 {/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/charutos" element={<CharutoList />} />
           <Route path="/whiskies" element={< WhiskyList/>} />
           <Route path="/profile" element={<ProfileSettings />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </Router>
