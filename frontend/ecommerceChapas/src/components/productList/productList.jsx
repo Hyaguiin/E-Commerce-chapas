@@ -1,6 +1,9 @@
+import React, { useState } from 'react';
 import '../../components/productList/productList.scss';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import Pagination from '../pagination/pagination';
+
 const products = [
   {
     id: 1,
@@ -113,6 +116,19 @@ const products = [
 ];
 
 export default function ProductList() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12; // Total de produtos por página (4x3)
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  // Obtenha os produtos a serem exibidos na página atual
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <Header />
@@ -120,8 +136,8 @@ export default function ProductList() {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+            {currentProducts.map((product) => (
               <div key={product.id} className="group relative border border-gray-300 rounded-md p-4 shadow-md hover:shadow-lg">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
@@ -145,6 +161,13 @@ export default function ProductList() {
               </div>
             ))}
           </div>
+
+          {/* Componente de Paginação */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
       <Footer />
