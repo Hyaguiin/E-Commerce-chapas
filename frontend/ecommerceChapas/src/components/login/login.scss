@@ -166,3 +166,15 @@ p {
         display: none; /* Esconde a imagem em telas pequenas */
     }
 }
+
+.error {
+    border: 2px solid red;
+    outline: none;
+}
+
+/* Estilo para a mensagem de erro */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}

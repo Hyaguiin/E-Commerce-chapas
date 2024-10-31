@@ -1,20 +1,56 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../../components/login/login.scss';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
+    // Função para validar email
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        if (!validateEmail(value)) {
+            setEmailError('Formato de e-mail inválido');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    // Função para validar senha com pelo menos 8 caracteres
+    const validatePassword = (password) => password.length >= 8;
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        if (!validatePassword(value)) {
+            setPasswordError('A senha deve ter pelo menos 8 caracteres');
+        } else {
+            setPasswordError('');
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (email && password) {
-            console.log('Email:', email, 'Password:', password);
-            navigate('/home'); // Redireciona para a página /home
-        } else {
-            alert('Por favor, preencha todos os campos.');
+
+        if (!validateEmail(email)) {
+            setEmailError('Por favor, insira um e-mail válido.');
+            return;
         }
+
+        if (!validatePassword(password)) {
+            setPasswordError('A senha deve ter pelo menos 8 caracteres');
+            return;
+        }
+
+        console.log('Email:', email, 'Password:', password);
+        // Lógica de autenticação pode ser adicionada aqui
     };
 
     return (
@@ -39,25 +75,27 @@ const Login = () => {
                         <input
                             id="email"
                             type="email"
-                            placeholder="Email@mail.com"
+                            placeholder="email@exemplo.com.br"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleEmailChange}
                             required
+                            className={emailError ? 'error' : ''}
                         />
+                        {emailError && <span className="error-message">{emailError}</span>}
                     </div>
 
-                    <div className="login-input-group-senha">
-                        <div className="login-input-group">
-                            <label htmlFor="senha">Senha</label>
-                            <input
-                                id="senha"
-                                type="password"
-                                placeholder="Sua Senha"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                        </div>
+                    <div className="login-input-group" id="login-password">
+                        <label htmlFor="senha">Senha</label>
+                        <input
+                            id="senha"
+                            type="password"
+                            placeholder="Sua Senha"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            required
+                            className={passwordError ? 'error' : ''}
+                        />
+                        {passwordError && <span className="error-message">{passwordError}</span>}
                     </div>
 
                     <div className="login-terms">
@@ -69,7 +107,7 @@ const Login = () => {
                         <span className='login-entrar'>Entrar</span>
                     </button>
 
-                    <p>Ainda não é registrado? <a href="/register" className="login-link">Crie uma conta</a></p>
+                    <p>Ainda não é registrado? <a href="#" className="login-link">Crie uma conta</a></p>
                 </form>
             </div>
 
