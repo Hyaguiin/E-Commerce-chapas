@@ -108,13 +108,13 @@ export default function Header() {
             )}
           </Popover>
 
-          <a href="/productList" className="text-sm font-semibold text-gray-900">Whisky</a>
-          <a href="/productList" className="text-sm font-semibold text-gray-900">Charutos</a>
-          <a href="/productList" className="text-sm font-semibold text-gray-900">Cavalos</a>
+          <a href="/whiskies" className="changecolor text-sm font-semibold text-gray-900">Whisky</a>
+          <a href="/charutos" className="changecolor text-sm font-semibold text-gray-900">Charutos</a>
+          <a href="/cavalos" className="changecolor text-sm font-semibold text-gray-900">Cavalos</a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/profile" className="text-sm font-semibold text-gray-900">Profile</a>
-          <a href="/" className="ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
+          <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
+          <a href="/" className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">

@@ -5,7 +5,9 @@ import Home from './components/home/home.jsx';
 import Register from './components/register/register.jsx';
 import ProductView from './components/productView/productView.jsx';
 import ChicoView from './components/productView/chicoView.jsx';
-import ProductList from './components/productList/productList.jsx';
+import CavaloList from './components/productList/cavalo.jsx';
+import CharutoList from './components/productList/charuto.jsx';
+import WhiskyList from './components/productList/whisky.jsx';
 import ProfileSettings from './components/profileSettings/profileSettings.jsx';
 {/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
@@ -13,16 +15,16 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} /> 
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/productView" element={<ProductView />} />
           <Route path="/chicoView" element={<ChicoView />} />
-          <Route path="/productList" element={<ProductList />} />
-          <Route path = "/profile" element = {<ProfileSettings ></ProfileSettings>}/>
-          
-
+          <Route path="/cavalos" element={<CavaloList />} />
+          <Route path="/charutos" element={<CharutoList />} />
+          <Route path="/whiskies" element={< WhiskyList/>} />
+          <Route path="/profile" element={<ProfileSettings />} />
         </Routes>
       </div>
     </Router>

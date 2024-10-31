@@ -4,120 +4,9 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import Pagination from '../pagination/pagination';
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-  },
-  {
-    id: 2,
-    name: 'Classic White Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-02.jpg',
-    imageAlt: "Front of men's Classic White Tee.",
-    price: '$30',
-    color: 'White',
-  },
-  {
-    id: 3,
-    name: 'Eu Tenteeei',
-    href: '/chicoView',
-    imageSrc: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lxtyj7s3s42a69',
-    imageAlt: "Front of men's Navy Blue Tee.",
-    price: '$50',
-    color: 'Gray',
-  },
-  {
-    id: 4,
-    name: 'Green Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-04.jpg',
-    imageAlt: "Front of men's Green Tee.",
-    price: '$33',
-    color: 'Green',
-  },
-  {
-    id: 5,
-    name: 'Red Graphic Tee',
-    href: '#',
-    imageSrc: 'https://i0.wp.com/loja.otakubfx.com.br/wp-content/uploads/2019/04/camiseta-berserk-guts-11.jpg?fit=1000%2C1000&ssl=1',
-    imageAlt: "Front of men's Red Graphic Tee.",
-    price: '$40',
-    color: 'Red',
-  },
-  {
-    id: 6,
-    name: 'Yellow Striped Tee',
-    href: '#',
-    imageSrc: 'https://img.elo7.com.br/product/zoom/21AA599/camisa-bolsonaro-presidente-03-camisa-bolsonaro.jpg',
-    imageAlt: "Front of men's Yellow Striped Tee.",
-    price: '$38',
-    color: 'Yellow',
-  },
-  {
-    id: 7,
-    name: 'Gray Long Sleeve Tee',
-    href: '#',
-    imageSrc: 'https://www.timeurban.com.br/media/catalog/product/cache/51a80c9da94f85ac42b65ba251e9fd91/s/o/sobretudo_masculino_preto_longo_fashion_benjamin_1.jpg',
-    imageAlt: "Front of men's Gray Long Sleeve Tee.",
-    price: '$45',
-    color: 'Gray',
-  },
-  {
-    id: 8,
-    name: 'Pink Short Sleeve Tee',
-    href: '#',
-    imageSrc: 'https://acdn.mitiendanube.com/stores/001/468/838/products/1080-x-1350-2023-05-02t162148-6851-207b2a50d8c75bbae316830555501390-640-0.png',
-    imageAlt: "Front of men's Pink Short Sleeve Tee.",
-    price: '$36',
-    color: 'Pink',
-  },
-  {
-    id: 9,
-    name: 'Brown Vintage Tee',
-    href: '#',
-    imageSrc: 'https://apollogearclub.com.br/cdn/shop/files/camisa-oversized-baki-v2-pp-668c2e0976742-large.jpg?v=1722355383',
-    imageAlt: "Front of men's Brown Vintage Tee.",
-    price: '$34',
-    color: 'Brown',
-  },
-  {
-    id: 10,
-    name: 'Zoro OnePiece T-Shirt',
-    href: '#',
-    imageSrc: 'https://img.ltwebstatic.com/images3_spmp/2024/02/14/ca/1707842572b90e0fcaaefd0eb45a2e155a2a2d86ed_thumbnail_720x.jpg',
-    imageAlt: "Three Sword hand man.",
-    price: '$24',
-    color: 'green',
-  },
-  {
-    id: 11,
-    name: 'Mia Khalifa Legends',
-    href: '#',
-    imageSrc: 'https://down-br.img.susercontent.com/file/sg-11134201-7rbm3-lmx7g8pjzvm8e8',
-    imageAlt: "I don't know she who's.",
-    price: '$58',
-    color: 'Brown',
-  },
-  {
-    id: 12,
-    name: 'Yujiro T-Shirt',
-    href: '/productView',
-    imageSrc: 'https://images-americanas.b2w.io/produtos/7473497060/imagens/camiseta-yujiro-hanma-baki/7473497068_1_large.jpg',
-    imageAlt: "The strongest Man in the World.",
-    price: '$50',
-    color: 'Brown',
-  },
-];
-
-export default function ProductList() {
+export default function ProductList({ products }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12; // Total de produtos por página (4x3)
+  const productsPerPage = 12; // Total de produtos por página
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   // Obtenha os produtos a serem exibidos na página atual
@@ -133,8 +22,8 @@ export default function ProductList() {
     <>
       <Header />
       <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Produtos Recomendados</h2>
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
             {currentProducts.map((product) => (

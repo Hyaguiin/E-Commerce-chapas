@@ -77,7 +77,7 @@ const AboutUs = () => {
                     <p className="text-gray-600 mb-4">
                         Nossos charutos são selecionados com rigor, oferecendo uma variedade de sabores que encanta até os mais exigentes.
                     </p>
-                    <a href="/productList">
+                    <a href="/charutos">
                         <img src={images[0]} alt="Charuto" className="w-full h-64 object-cover rounded shadow-lg transition-transform duration-300 hover:scale-105" />
                     </a>
                 </div>
@@ -86,7 +86,7 @@ const AboutUs = () => {
                     <p className="text-gray-600 mb-4">
                         Apresentamos uma coleção de whiskies de alta qualidade, cada um com uma história única, perfeita para momentos especiais.
                     </p>
-                    <a href="/productList">
+                    <a href="/whiskies">
                         <img src={images[1]} alt="Whisky" className="w-full h-80 object-cover rounded shadow-lg transition-transform duration-300 hover:scale-105" />
                     </a>
                 </div>
@@ -95,7 +95,7 @@ const AboutUs = () => {
                     <p className="text-gray-600 mb-4">
                         Acreditamos na beleza e na força dos cavalos. Trabalhamos com criadores renomados para oferecer os melhores animais.
                     </p>
-                    <a href="/productList">
+                    <a href="/cavalos">
                         <img src={images[2]} alt="Cavalo" className="w-full h-64 object-cover rounded shadow-lg transition-transform duration-300 hover:scale-105" />
                     </a>
                 </div>
