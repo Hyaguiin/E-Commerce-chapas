@@ -6,6 +6,7 @@ import Register from './components/register/register.jsx';
 import ProductView from './components/productView/productView.jsx';
 import ChicoView from './components/productView/chicoView.jsx';
 import ProductList from './components/productList/productList.jsx';
+import ProfileSettings from './components/profileSettings/profileSettings.jsx';
 {/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/productView" element={<ProductView />} />
           <Route path="/chicoView" element={<ChicoView />} />
           <Route path="/productList" element={<ProductList />} />
+          <Route path = "/profile" element = {<ProfileSettings ></ProfileSettings>}/>
           
 
         </Routes>

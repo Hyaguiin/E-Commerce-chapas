@@ -1,4 +1,3 @@
-// src/components/register/register.jsx
 import React, { useState } from 'react';
 import '../../components/register/register.scss';
 
@@ -8,11 +7,117 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [age, setAge] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [ageError, setAgeError] = useState('');
+    const [cpfError, setCpfError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [surnameError, setSurnameError] = useState('');
+
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const validateName = (name) => /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(name);
+    const validateCpf = (cpf) => /^\d{11}$/.test(cpf); // 11 dígitos
+    const validatePassword = (password) => password.length >= 8;
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        if (!validateEmail(value)) {
+            setEmailError('Formato de e-mail inválido');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        setName(value);
+        if (!validateName(value)) {
+            setNameError('Nome deve conter apenas letras');
+        } else {
+            setNameError('');
+        }
+    };
+
+    const handleSurnameChange = (e) => {
+        const value = e.target.value;
+        setSurname(value);
+        if (!validateName(value)) {
+            setSurnameError('Sobrenome deve conter apenas letras');
+        } else {
+            setSurnameError('');
+        }
+    };
+
+    const handleCpfChange = (e) => {
+        const value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+        setCpf(value);
+        if (!validateCpf(value)) {
+            setCpfError('CPF deve ter exatamente 11 dígitos');
+        } else {
+            setCpfError('');
+        }
+    };
+
+    const handleAgeChange = (e) => {
+        const value = e.target.value;
+        setAge(value);
+        if (value && value < 18) {
+            setAgeError('Você deve ter 18 anos ou mais');
+        } else {
+            setAgeError('');
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Adicione sua lógica de envio aqui, como uma requisição para uma API.
-        console.log('Dados do registro:', { name, surname, email, password, confirmPassword });
+
+        // Validação dos campos
+        if (!validateEmail(email)) {
+            setEmailError('Por favor, insira um e-mail válido.');
+            return;
+        }
+
+        if (!validateName(name)) {
+            setNameError('Nome deve conter apenas letras');
+            return;
+        }
+
+        if (!validateName(surname)) {
+            setSurnameError('Sobrenome deve conter apenas letras');
+            return;
+        }
+
+        if (!validateCpf(cpf)) {
+            setCpfError('CPF deve ter exatamente 11 dígitos');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            setPasswordError('A senha deve ter pelo menos 8 caracteres');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setPasswordError('As senhas não coincidem');
+            return;
+        }
+        setPasswordError('');
+
+        if (age < 18) {
+            setAgeError('Você deve ter 18 anos ou mais');
+            return;
+        }
+        setAgeError('');
+
+        // Se tudo estiver válido, imprima os dados
+        console.log('Dados do registro:', { name, surname, email, cpf, age, password, confirmPassword });
     };
 
     return (
@@ -25,7 +130,6 @@ const Register = () => {
                             src="https://cdn3d.iconscout.com/3d/premium/thumb/diamante-dourado-10703026-8796428.png" 
                             alt="Logo Facisa" 
                         />
-
                         <h1 className='whiteBelt'>White<span className="cor">Belt</span></h1>
                     </div>
                 </div>
@@ -40,9 +144,10 @@ const Register = () => {
                                 type="text" 
                                 placeholder="Nome" 
                                 value={name} 
-                                onChange={(e) => setName(e.target.value)} 
+                                onChange={handleNameChange} 
                                 required 
                             />
+                            {nameError && <span className="error-message">{nameError}</span>}
                         </div>
                         
                         <div className="input-group">
@@ -52,9 +157,10 @@ const Register = () => {
                                 type="text" 
                                 placeholder="Sobrenome" 
                                 value={surname} 
-                                onChange={(e) => setSurname(e.target.value)} 
+                                onChange={handleSurnameChange} 
                                 required 
                             />
+                            {surnameError && <span className="error-message">{surnameError}</span>}
                         </div>
                     </div>
 
@@ -65,9 +171,36 @@ const Register = () => {
                             type="email" 
                             placeholder="Email@mail.com" 
                             value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            onChange={handleEmailChange} 
                             required 
                         />
+                        {emailError && <span className="error-message">{emailError}</span>}
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="cpf">CPF</label>
+                        <input 
+                            id="cpf" 
+                            type="text" 
+                            placeholder="CPF (máx 11 dígitos)" 
+                            value={cpf} 
+                            onChange={handleCpfChange} 
+                            required 
+                        />
+                        {cpfError && <span className="error-message">{cpfError}</span>}
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="age">Idade</label>
+                        <input 
+                            id="age" 
+                            type="number" 
+                            placeholder="Idade" 
+                            value={age} 
+                            onChange={handleAgeChange} 
+                            required 
+                        />
+                        {ageError && <span className="error-message">{ageError}</span>}
                     </div>
 
                     <div className="input-group-senha">
@@ -93,6 +226,7 @@ const Register = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
                                 required 
                             />
+                            {passwordError && <span className="error-message">{passwordError}</span>}
                         </div>
                     </div>
 

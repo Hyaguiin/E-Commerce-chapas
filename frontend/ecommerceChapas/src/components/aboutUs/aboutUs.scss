@@ -1,4 +1,18 @@
+
 .Contato:hover {
     color: rgb(232, 202, 5);
 }
 
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.card:active {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}

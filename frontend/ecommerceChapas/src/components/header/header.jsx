@@ -63,7 +63,7 @@ export default function Header() {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
+          <Popover className="relative lg:hidden">
             {({ open }) => (
               <>
                 <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold text-gray-900">
@@ -108,12 +108,13 @@ export default function Header() {
             )}
           </Popover>
 
-          <a href="#" className="text-sm font-semibold text-gray-900">Features</a>
-          <a href="#" className="text-sm font-semibold text-gray-900">Marketplace</a>
-          <a href="#" className="text-sm font-semibold text-gray-900">Company</a>
+          <a href="/productList" className="text-sm font-semibold text-gray-900">Whisky</a>
+          <a href="/productList" className="text-sm font-semibold text-gray-900">Charutos</a>
+          <a href="/productList" className="text-sm font-semibold text-gray-900">Cavalos</a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/" className="text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
+          <a href="/profile" className="text-sm font-semibold text-gray-900">Profile</a>
+          <a href="/" className="ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -179,6 +180,9 @@ export default function Header() {
                 </a>
               </div>
               <div className="py-6">
+                <a href="/profile" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
+                  Profile
+                </a>
                 <a href="#" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
                   Log in
                 </a>

@@ -45,22 +45,22 @@ const AboutUs = () => {
 
             {/* Seção de Valores */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
-                <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className=" card p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <FaLightbulb className="text-4xl mb-4 text-black" />
                     <h3 className="font-bold text-xl" style={{ color: 'rgb(232, 202, 5)' }}>Inovação</h3>
                     <p className="text-gray-600">Buscamos novas soluções e abordagens.</p>
                 </div>
-                <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="card p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <FaUsers className="text-4xl mb-4 text-black" />
                     <h3 className="font-bold text-xl" style={{ color: 'rgb(232, 202, 5)' }}>Colaboração</h3>
                     <p className="text-gray-600">Trabalhamos juntos para alcançar nossos objetivos.</p>
                 </div>
-                <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="card p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <FaCogs className="text-4xl mb-4 text-black" />
                     <h3 className="font-bold text-xl" style={{ color: 'rgb(232, 202, 5)' }}>Qualidade</h3>
                     <p className="text-gray-600">Comprometemo-nos com a excelência.</p>
                 </div>
-                <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="card p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <FaStar className="text-4xl mb-4 text-black" />
                     <h3 className="font-bold text-xl" style={{ color: 'rgb(232, 202, 5)' }}>Transparência</h3>
                     <p className="text-gray-600">Valorizamos a honestidade em nossas relações.</p>
