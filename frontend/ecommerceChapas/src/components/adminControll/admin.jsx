@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeIcon, UserIcon, ShoppingCartIcon, Cog8ToothIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, UserIcon, ShoppingCartIcon, Cog8ToothIcon, ArrowRightOnRectangleIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 const AdminControll = () => {
   const [active, setActive] = React.useState('home');
@@ -79,29 +79,26 @@ const AdminControll = () => {
               <Cog8ToothIcon className="h-6 w-6 mr-3" />
               Configurações
             </a>
-
+          </li>
+          <li className="my-2">
             <a
               href="/bestSelles"
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'dashboard' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('dashboard')}
             >
-              <Cog8ToothIcon className="h-6 w-6 mr-3" />
-              bestSelles
+              <ChartBarIcon className="h-6 w-6 mr-3" />
+              Dashboard
             </a>
-
+          </li>
+          <li className="my-2">
             <a
               href="/"
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'logout' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('logout')}
             >
-              <Cog8ToothIcon className="h-6 w-6 mr-3" />
-              Logout  <span aria-hidden="true">&rarr;</span>
+              <ArrowRightOnRectangleIcon className="h-6 w-6 mr-3" />
+              Logout <span aria-hidden="true">&rarr;</span>
             </a>
-
-            
-            
-
-
           </li>
         </ul>
       </nav>

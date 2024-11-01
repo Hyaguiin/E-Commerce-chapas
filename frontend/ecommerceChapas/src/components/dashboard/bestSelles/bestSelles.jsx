@@ -17,12 +17,12 @@ const BestSelles = () => {
   };
 
   const productSalesData = {
-    labels: ['Produto A', 'Produto B', 'Produto C', 'Produto D'],
+    labels: ['Charuto', 'Whisky', 'Cavalo'],
     datasets: [
       {
         label: 'Mais Vendidos',
-        data: [300, 50, 100, 150],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+        data: [300, 150, 100], // Ajuste os valores conforme necessário
+        backgroundColor: ['#000', '#808080', '#FFCE56'], // Cores para cada produto
       },
     ],
   };
@@ -31,7 +31,17 @@ const BestSelles = () => {
     <div className="p-6">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Dashboard</h1>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">Nova Ação</button>
+        <div className="flex space-x-4">
+          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+            Adicionar Produto
+          </button>
+          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+            Adicionar Promoção
+          </button>
+          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+            Adicionar Funcionário
+          </button>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
