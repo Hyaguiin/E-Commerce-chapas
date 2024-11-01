@@ -11,7 +11,7 @@ const BestSelles = () => {
       {
         label: 'Vendas Totais',
         data: [120, 190, 300, 250, 500, 420],
-        backgroundColor: 'rgba(232, 202, 5, 0.6)', // Cor alterada aqui
+        backgroundColor: 'rgba(232, 202, 5, 0.6)',
       },
     ],
   };
@@ -21,37 +21,41 @@ const BestSelles = () => {
     datasets: [
       {
         label: 'Mais Vendidos',
-        data: [300, 150, 100], // Ajuste os valores conforme necessário
-        backgroundColor: ['#000', '#808080', '#FFCE56'], // Cores para cada produto
+        data: [300, 150, 100],
+        backgroundColor: ['#000', '#808080', '#FFCE56'],
       },
     ],
   };
 
   return (
     <div className="p-6">
-      <header className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <div className="flex space-x-4">
-          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Dashboard</h1>
+        <div className="flex flex-wrap space-x-2">
+          <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-yellow-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500">
             Adicionar Produto
           </button>
-          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+          <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-yellow-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500">
             Adicionar Promoção
           </button>
-          <button className="bg-black text-white font-semibold py-2 px-6 rounded hover:bg-yellow-500 transition duration-300">
+          <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-yellow-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500">
             Adicionar Funcionário
           </button>
         </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-4 shadow rounded-lg">
-          <h2 className="font-semibold mb-2">Vendas Totais (Últimos 6 meses)</h2>
-          <Bar data={salesData} />
+        <div className="bg-white p-4 shadow-lg rounded-lg">
+          <h2 className="font-semibold mb-2 text-lg md:text-xl">Vendas Totais (Últimos 6 meses)</h2>
+          <div className="h-64">
+            <Bar data={salesData} options={{ responsive: true, maintainAspectRatio: false }} />
+          </div>
         </div>
-        <div className="bg-white p-4 shadow rounded-lg">
-          <h2 className="font-semibold mb-2">Mais Vendidos</h2>
-          <Pie data={productSalesData} />
+        <div className="bg-white p-4 shadow-lg rounded-lg">
+          <h2 className="font-semibold mb-2 text-lg md:text-xl">Mais Vendidos</h2>
+          <div className="h-64">
+            <Pie data={productSalesData} options={{ responsive: true, maintainAspectRatio: false }} />
+          </div>
         </div>
       </div>
     </div>

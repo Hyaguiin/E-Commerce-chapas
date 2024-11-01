@@ -27,7 +27,7 @@ const AdminControll = () => {
         <div className="flex-shrink-0">
           <img
             className="h-12 w-12 rounded-full"
-            src="https://br.web.img3.acsta.net/newsv7/20/05/07/23/47/2428122.jpg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShVoGy6JXR-Zu1xLzy0z57ow-9GhafWeQYWQ&s"
             alt="User Avatar"
           />
         </div>
@@ -42,7 +42,7 @@ const AdminControll = () => {
         <ul>
           <li className="my-2">
             <a
-              href="/home"
+              href="/homeAdmin"
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'home' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('home')}
             >
@@ -52,12 +52,12 @@ const AdminControll = () => {
           </li>
           <li className="my-2">
             <a
-              href="/profile"
-              className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'profile' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-              onClick={() => handleSetActive('profile')}
+              href="/employer"
+              className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'employer' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
+              onClick={() => handleSetActive('employer')}
             >
               <UserIcon className="h-6 w-6 mr-3" />
-              Perfil
+              Funcionários
             </a>
           </li>
           <li className="my-2">
