@@ -7,8 +7,30 @@ export default function ProfileSettings({ setProfileImage }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
-  const [position, setPosition] = useState('');
+  const [houseNumber, setHouseNumber] = useState('');
   const [localProfileImage, setLocalProfileImage] = useState(null);
+  
+  // Estados para mensagens de erro
+  const [emailError, setEmailError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [addressError, setAddressError] = useState('');
+  const [houseNumberError, setHouseNumberError] = useState('');
+
+  // Função de validação de email
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (!validateEmail(value)) {
+      setEmailError('Formato de e-mail inválido');
+    } else {
+      setEmailError('');
+    }
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -21,7 +43,16 @@ export default function ProfileSettings({ setProfileImage }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, address, position, localProfileImage });
+    
+    // Verificação de campos obrigatórios
+    if (!name) setNameError('Nome é obrigatório');
+    if (!email || emailError) setEmailError('E-mail é obrigatório e deve estar no formato correto');
+    if (!address) setAddressError('Endereço é obrigatório');
+    if (!houseNumber) setHouseNumberError('Número da casa é obrigatório');
+
+    if (name && validateEmail(email) && address && houseNumber) {
+      console.log({ name, email, address, houseNumber, localProfileImage });
+    }
   };
 
   return (
@@ -32,7 +63,7 @@ export default function ProfileSettings({ setProfileImage }) {
         <form onSubmit={handleSubmit} className="profile-form">
           <div className="profile-image-input">
             <CameraIcon className="h-6 w-6 text-gray-500" />
-            <label>Imagen de Perfil:</label>
+            <label>Imagem de Perfil:</label>
             <input type="file" onChange={handleImageChange} />
           </div>
           {localProfileImage && (
@@ -47,40 +78,53 @@ export default function ProfileSettings({ setProfileImage }) {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setNameError(''); // Limpa o erro ao digitar
+              }}
               placeholder="Seu Nome"
               required
             />
+            {nameError && <p className="error-message">{nameError}</p>} {/* Mensagem de erro em vermelho */}
           </div>
           <div className="profile-input-group">
             <label>Email:</label>
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               placeholder="Email@exemplo.com.br"
               required
             />
+            {emailError && <p className="error-message">{emailError}</p>} {/* Mensagem de erro em vermelho */}
           </div>
           <div className="profile-input-group">
             <label>Endereço:</label>
             <input
               type="text"
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => {
+                setAddress(e.target.value);
+                setAddressError(''); // Limpa o erro ao digitar
+              }}
               placeholder="Seu endereço"
               required
             />
+            {addressError && <p className="error-message">{addressError}</p>} {/* Mensagem de erro em vermelho */}
           </div>
           <div className="profile-input-group">
-            <label>Position:</label>
+            <label>Número da Casa:</label>
             <input
               type="text"
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
-              placeholder="Enter your position"
+              value={houseNumber}
+              onChange={(e) => {
+                setHouseNumber(e.target.value);
+                setHouseNumberError(''); // Limpa o erro ao digitar
+              }}
+              placeholder="Número da casa/apartamento/lote"
               required
             />
+            {houseNumberError && <p className="error-message">{houseNumberError}</p>} {/* Mensagem de erro em vermelho */}
           </div>
           <button type="submit" className="profile-save-button">Salvar</button>
         </form>

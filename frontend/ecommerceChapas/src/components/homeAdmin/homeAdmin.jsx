@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AdminControll from "../adminControll/admin";
 import BestSelles from "../dashboard/bestSelles/bestSelles";
+import Employer from "../dashboard/employer/employer";
 
 const HomeAdmin = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,10 @@ const HomeAdmin = () => {
 
             {/* Conteúdo principal */}
             <div className="flex-1 p-6">
-                <BestSelles />
+                <div className="flex flex-col space-y-6">
+                    <BestSelles />
+                    <Employer />
+                </div>
             </div>
         </div>
     );
