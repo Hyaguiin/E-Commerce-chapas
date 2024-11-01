@@ -14,6 +14,7 @@ import BestSelles from './components/homeAdmin/dashboard/bestSelles/bestSelles.j
 import { SiD } from 'react-icons/si';
 import HomeAdmin from './components/homeAdmin/homeAdmin.jsx';
 import Contact from './components/contact/contact.jsx';
+import Employer from './components/homeAdmin/employer/employer.jsx';
 {/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/homeAdmin" element={<HomeAdmin />} />
           <Route path="/bestSelles" element={<BestSelles />} />
+          <Route path="/employer" element={<Employer />} />
 
         
       

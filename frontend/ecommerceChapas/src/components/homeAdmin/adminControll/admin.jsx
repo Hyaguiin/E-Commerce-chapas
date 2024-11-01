@@ -1,11 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HomeIcon, UserIcon, ShoppingCartIcon, Cog8ToothIcon, ArrowRightOnRectangleIcon, ChartBarIcon, TagIcon } from '@heroicons/react/24/outline';
 
-const AdminControll = () => {
+const AdminControll = ({ setCurrentComponent }) => {
+  const navigate = useNavigate();
   const [active, setActive] = React.useState('home');
 
-  const handleSetActive = (item) => {
-    setActive(item);
+  const handleSetActive = (component) => {
+    setActive(component);
+    setCurrentComponent(component); // Atualiza o componente no HomeAdmin
+  };
+
+  const handleLogout = () => {
+    // Aqui você pode adicionar a lógica de logout, se necessário
+    navigate('/'); // Redireciona para a rota "/"
+  };
+
+  const handleProducts = () => {
+    navigate('/products'); // Redireciona para a rota "/products"
   };
 
   return (
@@ -41,74 +53,67 @@ const AdminControll = () => {
       <nav className="flex-1 px-2 py-4">
         <ul>
           <li className="my-2">
-            <a
-              href="/homeAdmin"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'home' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('home')}
             >
               <HomeIcon className="h-6 w-6 mr-3" />
               Home
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/employer"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'employer' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('employer')}
             >
               <UserIcon className="h-6 w-6 mr-3" />
               Funcionários
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/produtos"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'cart' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-              onClick={() => handleSetActive('cart')}
+              onClick={handleProducts} // Atualizado para chamar a função de navegação
             >
               <ShoppingCartIcon className="h-6 w-6 mr-3" />
               Produtos
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/promocoes"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'promocao' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('promocao')}
             >
-              <TagIcon className="h-6 w-6 mr-3" /> {/* Ícone de promoção */}
+              <TagIcon className="h-6 w-6 mr-3" />
               Promoções
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/settings"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'settings' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('settings')}
             >
               <Cog8ToothIcon className="h-6 w-6 mr-3" />
               Configurações
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/bestSelles"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'dashboard' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('dashboard')}
             >
               <ChartBarIcon className="h-6 w-6 mr-3" />
               Dashboard
-            </a>
+            </button>
           </li>
           <li className="my-2">
-            <a
-              href="/"
+            <button
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'logout' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-              onClick={() => handleSetActive('logout')}
+              onClick={handleLogout}
             >
               <ArrowRightOnRectangleIcon className="h-6 w-6 mr-3" />
               Logout <span aria-hidden="true">&rarr;</span>
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
