@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeIcon, UserIcon, ShoppingCartIcon, Cog8ToothIcon, ArrowRightOnRectangleIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, UserIcon, ShoppingCartIcon, Cog8ToothIcon, ArrowRightOnRectangleIcon, ChartBarIcon, TagIcon } from '@heroicons/react/24/outline';
 
 const AdminControll = () => {
   const [active, setActive] = React.useState('home');
@@ -62,12 +62,22 @@ const AdminControll = () => {
           </li>
           <li className="my-2">
             <a
-              href="/cart"
+              href="/produtos"
               className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'cart' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
               onClick={() => handleSetActive('cart')}
             >
               <ShoppingCartIcon className="h-6 w-6 mr-3" />
-              Carrinho
+              Produtos
+            </a>
+          </li>
+          <li className="my-2">
+            <a
+              href="/promocoes"
+              className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'promocao' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
+              onClick={() => handleSetActive('promocao')}
+            >
+              <TagIcon className="h-6 w-6 mr-3" /> {/* Ícone de promoção */}
+              Promoções
             </a>
           </li>
           <li className="my-2">

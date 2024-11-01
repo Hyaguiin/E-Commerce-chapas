@@ -10,10 +10,10 @@ import CharutoList from './components/productList/charuto.jsx';
 import WhiskyList from './components/productList/whisky.jsx';
 import ProfileSettings from './components/profileSettings/profileSettings.jsx';
 import Cart from './components/cart/cart.jsx';
-import AdminControll from './components/adminControll/admin.jsx';
-import BestSelles from './components/dashboard/bestSelles/bestSelles.jsx';
+import BestSelles from './components/homeAdmin/dashboard/bestSelles/bestSelles.jsx';
 import { SiD } from 'react-icons/si';
 import HomeAdmin from './components/homeAdmin/homeAdmin.jsx';
+import Contact from './components/contact/contact.jsx';
 {/*   o scroll cagado ta em  productList.scss  em, se lembra!*/}
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
           <Route path="/whiskies" element={< WhiskyList/>} />
           <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/homeAdmin" element={<HomeAdmin />} />
           <Route path="/bestSelles" element={<BestSelles />} />
 

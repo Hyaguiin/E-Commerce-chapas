@@ -1,19 +1,20 @@
 import React, { useState } from "react";
+import { FaBars } from 'react-icons/fa'; 
 import AdminControll from "../adminControll/admin";
-import BestSelles from "../dashboard/bestSelles/bestSelles";
-import Employer from "../dashboard/employer/employer";
+import BestSelles from "./dashboard/bestSelles/bestSelles";
+import Employer from "./employer/employer";
+import GridList from "./gridList/gridList";
 
 const HomeAdmin = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="flex h-screen">
-            {/* Botão de Menu para telas pequenas */}
             <button
-                className="md:hidden p-4 bg-black text-white"
+                className="md:hidden p-4 bg-black text-white flex items-center"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                Menu
+                <FaBars className="text-xl" /> 
             </button>
 
             {/* Barra lateral */}
@@ -26,6 +27,8 @@ const HomeAdmin = () => {
                 <div className="flex flex-col space-y-6">
                     <BestSelles />
                     <Employer />
+                    {/* Adicionando o GridList aqui */}
+                    <GridList />
                 </div>
             </div>
         </div>

@@ -122,8 +122,10 @@ const AboutUs = () => {
 
             {/* Botão de Ação */}
             <div className="mt-10 text-center">
-                <button className="bg-black text-white font-semibold py-2 px-6 rounded">
+                <button className="bg-black text-white font-semibold py-2 px-6 rounded"><a href="/contact"> 
+                
                     <span className='Contato hover:text-[rgb(232,202,5)] transition duration-300'> Entre em Contato </span>
+                </a>
                 </button>
             </div>
         </div>
