@@ -3,17 +3,31 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": " tsc app.ts",
+    "dev": "ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
     "mysql2": "^3.11.3",
-    "npx": "^3.0.0",
-    "tsc": "^2.0.4",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.6.3"
   }
 }

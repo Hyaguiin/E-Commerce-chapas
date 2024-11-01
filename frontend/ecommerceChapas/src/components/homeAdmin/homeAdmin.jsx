@@ -4,6 +4,7 @@ import AdminControll from "../adminControll/admin";
 import BestSelles from "./dashboard/bestSelles/bestSelles";
 import Employer from "./employer/employer";
 import GridList from "./gridList/gridList";
+import '../homeAdmin/homeAdmin.scss'
 
 const HomeAdmin = () => {
     const [isOpen, setIsOpen] = useState(false);
