@@ -53,6 +53,12 @@ const Login = () => {
 
         console.log('Email:', email, 'Password:', password);
         navigate('/home'); 
+
+        if(email == 'admin@login.com'){
+            navigate('/homeAdmin');
+        }else{
+            navigate('/home')
+        }
     };
 
     return (

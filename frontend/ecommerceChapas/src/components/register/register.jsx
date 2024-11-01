@@ -241,7 +241,7 @@ const Register = () => {
                         <span className='cadastrar'>Cadastrar</span>
                     </button>
 
-                    <p>Já tem uma conta? <a href="#" className="link">Entrar</a></p>
+                    <p>Já tem uma conta? <a href="/login" className="link">Entrar</a></p>
                 </form>
             </div>
 
