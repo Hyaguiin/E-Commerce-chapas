@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importe o hook useNavigate
 import '../../components/login/login.scss';
 
 const Login = () => {
@@ -7,7 +9,8 @@ const Login = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    // Função para validar email
+    const navigate = useNavigate(); // Inicialize o hook de navegação
+
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
@@ -23,7 +26,6 @@ const Login = () => {
         }
     };
 
-    // Função para validar senha com pelo menos 8 caracteres
     const validatePassword = (password) => password.length >= 8;
 
     const handlePasswordChange = (e) => {
@@ -50,7 +52,7 @@ const Login = () => {
         }
 
         console.log('Email:', email, 'Password:', password);
-        // Lógica de autenticação pode ser adicionada aqui
+        navigate('/home'); 
     };
 
     return (
@@ -107,7 +109,7 @@ const Login = () => {
                         <span className='login-entrar'>Entrar</span>
                     </button>
 
-                    <p>Ainda não é registrado? <a href="#" className="login-link">Crie uma conta</a></p>
+                    <p>Ainda não é registrado? <a href="/register" className="login-link">Crie uma conta</a></p>
                 </form>
             </div>
 

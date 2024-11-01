@@ -115,7 +115,7 @@ export default function Header() {
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           
-          <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
+         <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
           <a href="/cart" className="changecolor ml-6 text-sm font-semibold text-gray-900"> Cart </a>
           <a href="/" className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
