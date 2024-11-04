@@ -10,6 +10,9 @@ const BestSelles = () => {
     name: '',
     price: '',
     description: '',
+    color: '',
+    breed: '',
+    imageSrc: '',
   });
 
   const salesData = {
@@ -36,7 +39,7 @@ const BestSelles = () => {
 
   const handleProductSelect = (product) => {
     setSelectedProduct(product);
-    setFormData({ name: '', price: '', description: '' }); // Reset form data
+    setFormData({ name: '', price: '', description: '', color: '', breed: '', imageSrc: '' }); // Reset form data
   };
 
   const handleChange = (e) => {
@@ -46,10 +49,13 @@ const BestSelles = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar os dados do formulário
     console.log('Dados do produto:', formData);
-    // Fechar o formulário após o envio
     setSelectedProduct(null);
+  };
+
+  const handleCancel = () => {
+    setSelectedProduct(null);
+    setFormData({ name: '', price: '', description: '', color: '', breed: '', imageSrc: '' }); // Reset form data
   };
 
   return (
@@ -57,22 +63,13 @@ const BestSelles = () => {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Dashboard</h1>
         <div className="flex flex-wrap space-x-2">
-          <button
-            onClick={() => handleProductSelect('Cavalo')}
-            className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none"
-          >
+          <button onClick={() => handleProductSelect('Cavalo')} className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none">
             Adicionar Cavalo
           </button>
-          <button
-            onClick={() => handleProductSelect('Whisky')}
-            className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none"
-          >
+          <button onClick={() => handleProductSelect('Whisky')} className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none">
             Adicionar Whisky
           </button>
-          <button
-            onClick={() => handleProductSelect('Charuto')}
-            className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none"
-          >
+          <button onClick={() => handleProductSelect('Charuto')} className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none">
             Adicionar Charuto
           </button>
         </div>
@@ -84,49 +81,45 @@ const BestSelles = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder={`Nome do ${selectedProduct}`}
-                required
-              />
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`Nome do ${selectedProduct}`} required />
             </div>
 
             <div className="mb-4">
               <label htmlFor="price" className="block text-sm font-medium text-gray-700">Preço</label>
-              <input
-                type="text"
-                id="price"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder={`Preço do ${selectedProduct}`}
-                required
-              />
+              <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`Preço do ${selectedProduct}`} required />
             </div>
 
             <div className="mb-4">
               <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descrição</label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder={`Descrição do ${selectedProduct}`}
-                rows="3"
-                required
-              />
+              <textarea id="description" name="description" value={formData.description} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`Descrição do ${selectedProduct}`} rows="3" required />
             </div>
 
-            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
-              Cadastrar {selectedProduct}
-            </button>
+            <div className="mb-4">
+              <label htmlFor="color" className="block text-sm font-medium text-gray-700">Cor</label>
+              <input type="text" id="color" name="color" value={formData.color} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`Cor do ${selectedProduct}`} required />
+            </div>
+
+            {/* Exibir campo "raça" apenas se o produto selecionado for "Cavalo" */}
+            {selectedProduct === 'Cavalo' && (
+              <div className="mb-4">
+                <label htmlFor="breed" className="block text-sm font-medium text-gray-700">Raça</label>
+                <input type="text" id="breed" name="breed" value={formData.breed} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder="Raça do Cavalo" required />
+              </div>
+            )}
+
+            <div className="mb-4">
+              <label htmlFor="imageSrc" className="block text-sm font-medium text-gray-700">Imagem URL</label>
+              <input type="text" id="imageSrc" name="imageSrc" value={formData.imageSrc} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`URL da imagem do ${selectedProduct}`} required />
+            </div>
+
+            <div className="flex space-x-2">
+              <button type="submit" className="w-full bg-black text-white p-2 rounded-md hover:text-yellow-500 transition duration-300">
+                Cadastrar {selectedProduct}
+              </button>
+              <button type="button" onClick={handleCancel} className="w-full bg-black text-white p-2 rounded-md hover:text-yellow-500 transition duration-300">
+                Cancelar
+              </button>
+            </div>
           </form>
         </div>
       )}
