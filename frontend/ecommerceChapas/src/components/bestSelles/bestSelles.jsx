@@ -62,7 +62,7 @@ const BestSelles = () => {
     <div className="p-6">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Dashboard</h1>
-        <div className="flex flex-wrap space-x-2">
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
           <button onClick={() => handleProductSelect('Cavalo')} className="bg-transparent border border-black text-black font-semibold py-2 px-4 rounded hover:text-yellow-500 transition duration-300 focus:outline-none">
             Adicionar Cavalo
           </button>
