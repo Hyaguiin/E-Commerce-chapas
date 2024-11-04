@@ -12,6 +12,7 @@ const BestSelles = () => {
     description: '',
     color: '',
     breed: '',
+    brand: '',
     imageSrc: '',
   });
 
@@ -39,7 +40,7 @@ const BestSelles = () => {
 
   const handleProductSelect = (product) => {
     setSelectedProduct(product);
-    setFormData({ name: '', price: '', description: '', color: '', breed: '', imageSrc: '' }); // Reset form data
+    setFormData({ name: '', price: '', description: '', color: '', breed: '', brand: '', imageSrc: '' }); // Reset form data
   };
 
   const handleChange = (e) => {
@@ -55,7 +56,7 @@ const BestSelles = () => {
 
   const handleCancel = () => {
     setSelectedProduct(null);
-    setFormData({ name: '', price: '', description: '', color: '', breed: '', imageSrc: '' }); // Reset form data
+    setFormData({ name: '', price: '', description: '', color: '', breed: '', brand: '', imageSrc: '' }); // Reset form data
   };
 
   return (
@@ -106,6 +107,14 @@ const BestSelles = () => {
                 <input type="text" id="breed" name="breed" value={formData.breed} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder="Raça do Cavalo" required />
               </div>
             )}
+
+            {/* Exibir campo "marca" apenas se o produto selecionado for "Whisky" ou "Charuto" */}
+            {selectedProduct === 'Whisky' || selectedProduct === 'Charuto' ? (
+              <div className="mb-4">
+                <label htmlFor="brand" className="block text-sm font-medium text-gray-700">Marca</label>
+                <input type="text" id="brand" name="brand" value={formData.brand} onChange={handleChange} className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" placeholder={`Marca do ${selectedProduct}`} required />
+              </div>
+            ) : null}
 
             <div className="mb-4">
               <label htmlFor="imageSrc" className="block text-sm font-medium text-gray-700">Imagem URL</label>
