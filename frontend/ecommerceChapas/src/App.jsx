@@ -15,6 +15,7 @@ import BestSelles from './pages/homeAdmin/homeAdmin.jsx';
 import HomeAdmin from './pages/homeAdmin/homeAdmin.jsx';
 import Contact from './components/contact/contact.jsx';
 import Employer from './components/employer/employer.jsx';
+import ProductAdd from './components/productAdd/productAdd.jsx';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/homeAdmin" element={<HomeAdmin />} />
             <Route path="/bestSelles" element={<BestSelles />} />
             <Route path="/employer" element={<Employer />} />
+            <Route path="/productAdd" element={<ProductAdd />} />
           </Routes>
         </div>
       </Router>

@@ -1,0 +1,19 @@
+.homeAdmin {
+    display: flex;
+    height: 100vh; // Mantém a altura da tela
+
+    .sidebar {
+        flex: none;
+        width: 250px; // Largura fixa para a barra lateral
+        background-color: black;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 1.5rem; // Espaçamento interno
+        overflow-y: auto; // Permite o scroll vertical
+        max-height: 100vh; // Limita a altura máxima
+    }
+}

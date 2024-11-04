@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GridList = () => {
+const ProductAdd = () => {
     const items = [
         { id: 1, title: 'Produto 1', description: 'Descrição do produto 1' },
         { id: 2, title: 'Produto 2', description: 'Descrição do produto 2' },
@@ -18,7 +18,7 @@ const GridList = () => {
                     <div key={item.id} className="bg-white shadow-md rounded-lg overflow-hidden">
                         <div className="p-4">
                             <h3 className="text-lg font-semibold">{item.title}</h3>
-                            <p className="text-gray-600">{item.description}</p>
+                            <p className="text-gray-600">{item.description}</p>z
                         </div>
                     </div>
                 ))}
@@ -27,4 +27,4 @@ const GridList = () => {
     );
 };
 
-export default GridList;
+export default ProductAdd;

@@ -3,7 +3,7 @@ import { FaBars } from 'react-icons/fa';
 import AdminControll from "../../components/adminControll/admin";
 import BestSelles from "../../components/bestSelles/bestSelles";
 import Employer from "../../components/employer/employer";
-import GridList from "../../components/gridList/gridList";
+import ProductADD from "../../components/productAdd/productAdd";
 import './homeAdmin.scss';
 
 const HomeAdmin = () => {
@@ -40,7 +40,7 @@ const HomeAdmin = () => {
                 <div className="flex flex-col space-y-6">
                     {renderComponent()}
                     {/* Adicionando o GridList aqui, se necessário */}
-                    <GridList />
+                    <ProductADD />
                 </div>
             </div>
         </div>

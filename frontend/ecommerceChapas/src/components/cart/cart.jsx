@@ -44,8 +44,12 @@ export default function Cart() {
                 <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                   <div className="flex items-start justify-between">
                     <DialogTitle className="text-lg font-medium text-gray-900">Shopping cart</DialogTitle>
-                    <button type="button" onClick={() => setIsOpen(false)} className="close-button ml-3">
-                      <XMarkIcon className="h-6 w-6 text-gray-400 hover:text-gray-500" />
+                    <button 
+                      type="button" 
+                      onClick={() => setIsOpen(false)} 
+                      className="close-button ml-3 hover:text-yellow-500 transition duration-300"
+                    >
+                      <XMarkIcon className="h-6 w-6 text-gray-400 hover:text-yellow-500" />
                     </button>
                   </div>
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
