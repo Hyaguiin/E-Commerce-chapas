@@ -1,32 +1,41 @@
-// src/components/home/home.jsx
-import React from 'react';
-import Header from '../../components/header/header.jsx';
-import ProductList from '../../components/productList/productList.jsx';
-import { Dialog, Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/react';
-import Footer from '../../components/footer/footer.jsx';
+import React from 'react'; // Certifique-se de incluir esta linha
+import Header from '../../components/header/header.jsx'
 import AboutUs from '../../components/aboutUs/aboutUs.jsx';
+import Footer from '../../components/footer/footer.jsx';
 
-
-
-
-
-
-
-const Home = () => {
-    return (
-        <>
-    
-
-        <Header />
-        {/*  <ProductList></ProductList>   */}
-       <AboutUs></AboutUs>
-        <Footer></Footer>
-        <div>
-        
-        </div>
-        
-        </>
-    );
-};
-
-export default Home; // Verifique se esta linha está presente
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { hasError: false };
+    }
+  
+    static getDerivedStateFromError(error) {
+      return { hasError: true };
+    }
+  
+    componentDidCatch(error, errorInfo) {
+      console.error("Error caught in Error Boundary:", error, errorInfo);
+    }
+  
+    render() {
+      if (this.state.hasError) {
+        return <h1>Something went wrong with the Header.</h1>;
+      }
+  
+      return this.props.children; 
+    }
+  }
+  
+  // In your Home component
+  const Home = () => {
+      return (
+          <>
+              <ErrorBoundary>
+                  <Header />
+              </ErrorBoundary>
+              <AboutUs />
+              <Footer />
+          </>
+      );
+  };
+export default Home;  
