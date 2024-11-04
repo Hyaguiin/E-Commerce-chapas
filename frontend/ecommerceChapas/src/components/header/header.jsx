@@ -12,15 +12,14 @@ import {
   PopoverPanel,
 } from '@headlessui/react';
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
+  ChevronDownIcon,
+  PhoneIcon,
+  PlayCircleIcon,
   XMarkIcon,
+  ChartPieIcon,
 } from '@heroicons/react/24/outline';
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid';
+import { useCart } from '../cart/CartContext'; // Ajuste conforme necessário
 
 const products = [
   { name: 'Cavalos', description: 'Explore our beautiful horses', href: '/cavalos', icon: ChartPieIcon },
@@ -35,11 +34,17 @@ const callsToAction = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { setIsOpen } = useCart(); // Assumindo que isso está funcionando corretamente
+
+  const handleCartClick = () => {
+    console.log("Cart button clicked!"); // Log para verificar se o botão foi clicado
+    setIsOpen(true); // Abre o carrinho
+  };
 
   return (
     <header className="header border border-gray-200 shadow-lg">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-      <div className="flex lg:flex-1">
+        <div className="flex lg:flex-1">
           <a href="/home" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
@@ -70,7 +75,6 @@ export default function Header() {
                   Product
                   <ChevronDownIcon aria-hidden="true" className={`h-5 w-5 flex-none ${open ? 'rotate-180' : 'text-gray-400'}`} />
                 </PopoverButton>
-
                 <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                   <div className="p-4">
                     {products.map((item) => (
@@ -107,20 +111,26 @@ export default function Header() {
               </>
             )}
           </Popover>
-
           <a href="/whiskies" className="changecolor text-sm font-semibold text-gray-900">Whisky</a>
           <a href="/charutos" className="changecolor text-sm font-semibold text-gray-900">Charutos</a>
           <a href="/cavalos" className="changecolor text-sm font-semibold text-gray-900">Cavalos</a>
           <a href="/promocoes" className="changecolor text-sm font-semibold text-gray-900">Promoções</a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          
-         <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
-          <a href="/cart" className="changecolor ml-6 text-sm font-semibold text-gray-900"> Cart </a>
+          <a href="/profile" className="changecolor text-sm font-semibold text-gray-900">Profile</a>
+          <button 
+            onClick={() => {
+              console.log("Cart opened"); // Adicionando log
+              setIsOpen(true); // Abrindo o carrinho
+            }} 
+            className="changecolor ml-6 text-sm font-semibold text-gray-900"
+          >
+            Cart
+          </button>
           <a href="/" className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
       </nav>
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+      <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className="lg:hidden">
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
