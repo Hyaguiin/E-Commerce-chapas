@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../header/header';
 import { CameraIcon } from '@heroicons/react/24/outline';
-import './ProfileSettings.scss';
+import './profileSettings.scss';
 
 export default function ProfileSettings({ setProfileImage }) {
   const [name, setName] = useState('');
