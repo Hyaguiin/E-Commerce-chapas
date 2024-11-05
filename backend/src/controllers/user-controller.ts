@@ -3,28 +3,34 @@ import {
   authLogin,
   createUser,
   delteUserById,
+  findUserByCpf,
   findUserByEmail,
   findUserById,
   updateUserById,
 } from "../services/user-service";
 import bcrypt from "bcrypt";
+import { User } from "../models/user-model";
 
 export async function addUser(req: Request, res: Response): Promise<void> {
   try {
-    const user = req.body;
+    const user: User = req.body;
     const password = user.password;
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
     if (user) {
-      const sameEmail = await findUserByEmail(user.email);
-      if (!sameEmail) {
-        const response = await createUser(user);
-        if (response) {
-          res.status(201).json({ msg: "Usuário criado", data: response });
-          return;
-        }
-      } else {
+      const emailExists = await findUserByEmail(user.email);
+      const cpfExists = await findUserByCpf(user.cpf);
+      if (emailExists) {
         res.status(400).json({ erro: "Usuário com mesmo email já existe." });
+        return;
+      }
+      if (cpfExists) {
+        res.status(400).json({ erro: "Usuário com mesmo cpf já existe." });
+        return;
+      }
+      const response = await createUser(user);
+      if (response) {
+        res.status(201).json({ msg: "Usuário criado", data: response });
         return;
       }
     }
@@ -55,7 +61,7 @@ export async function getUserById(req: Request, res: Response): Promise<void> {
 export async function updateUser(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
-    const user = req.body;
+    const user: User = req.body;
     if (id && user) {
       const response = await updateUserById(id, user);
       if (response) {
@@ -90,7 +96,7 @@ export async function deleteUser(req: Request, res: Response): Promise<void> {
 export async function login(req: Request, res: Response): Promise<void> {
   try {
     const { email, password } = req.body;
-    const user = await findUserByEmail(email);
+    const user: User | null = await findUserByEmail(email);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       res.status(401).json({ msg: "Email ou senha inválidos." });
       return;

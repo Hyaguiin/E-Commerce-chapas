@@ -47,6 +47,20 @@ export async function findUserByEmail(email: string): Promise<User | null> {
   return null;
 }
 
+export async function findUserByCpf(cpf: string): Promise<User | null> {
+  if (!cpf) {
+    throw new Error("Missing cpf");
+  }
+
+  const user = await mongoUser.findByCpf(cpf);
+
+  if (user) {
+    return user;
+  }
+
+  return null;
+}
+
 export async function updateUserById(id: string, user: User): Promise<User | null> {
   if (!id && !user) {
     throw new Error("Invalid data");

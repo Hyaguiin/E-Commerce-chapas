@@ -10,6 +10,10 @@ export class MongoUser implements UserInterface {
     return await UserModel.findOne({ email: email });
   }
 
+  async findByCpf(cpf: string): Promise<User | null> {
+    return await UserModel.findOne({ cpf: cpf });
+  }
+
   async create(user: User): Promise<User> {
     return await UserModel.create(user);
   }
