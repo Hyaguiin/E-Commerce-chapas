@@ -7,6 +7,10 @@ export class MongoUser implements UserInterface {
     return await UserModel.findById(id);
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    return await UserModel.findOne({ email: email });
+  }
+
   async create(user: User): Promise<User> {
     return await UserModel.create(user);
   }

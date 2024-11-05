@@ -1,5 +1,7 @@
 import { MongoUser } from "../database/user-mongodb";
 import { User } from "../models/user-model";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/config";
 
 const mongoUser = new MongoUser();
 
@@ -31,10 +33,21 @@ export async function findUserById(id: string): Promise<User | null> {
   return null;
 }
 
-export async function updateUserById(
-  id: string,
-  user: User
-): Promise<User | null> {
+export async function findUserByEmail(email: string): Promise<User | null> {
+  if (!email) {
+    throw new Error("Missing email");
+  }
+
+  const user = await mongoUser.findByEmail(email);
+
+  if (user) {
+    return user;
+  }
+
+  return null;
+}
+
+export async function updateUserById(id: string, user: User): Promise<User | null> {
   if (!id && !user) {
     throw new Error("Invalid data");
   }
@@ -57,6 +70,30 @@ export async function delteUserById(id: string): Promise<User | null> {
 
   if (deletedUser) {
     return deletedUser;
+  }
+
+  return null;
+}
+
+export async function authLogin(id: string | unknown, email: string, role: string): Promise<string | null> {
+  if (!id || !email || !role) {
+    throw new Error("Invalid credentials");
+  }
+
+  const token = jwt.sign(
+    {
+      id: id,
+      email: email,
+      role: role,
+    },
+    JWT_SECRET,
+    {
+      expiresIn: "6h",
+    }
+  );
+
+  if (token) {
+    return token;
   }
 
   return null;

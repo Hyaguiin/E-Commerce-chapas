@@ -6,7 +6,7 @@ export interface User extends Document {
   email: string;
   password: string;
   address: Address;
-  role: string;
+  role: "admin" | "user";
 }
 
 const userSchema = new Schema({
@@ -14,7 +14,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: addressSchema, required: true },
-  role: { type: String, required: true },
+  role: { type: String, enum: ["admin", "user"], required: true },
 });
 
 export const UserModel = model("User", userSchema);
