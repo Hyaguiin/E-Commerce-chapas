@@ -31,7 +31,7 @@ export async function addUser(req: Request, res: Response): Promise<void> {
     res.status(400).json({ msg: "Usuário inválido." });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: error });
+    res.status(500).json({ erro: "Ocorreu um erro inesperado" });
   }
 }
 
@@ -48,7 +48,7 @@ export async function getUserById(req: Request, res: Response): Promise<void> {
     res.status(404).json({ msg: "Usuário não encontrado" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: error });
+    res.status(500).json({ erro: "Ocorreu um erro inesperado" });
   }
 }
 
@@ -66,7 +66,7 @@ export async function updateUser(req: Request, res: Response): Promise<void> {
     res.status(404).json({ msg: "Usuário não encontrado" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: error });
+    res.status(500).json({ erro: "Ocorreu um erro inesperado" });
   }
 }
 
@@ -83,7 +83,7 @@ export async function deleteUser(req: Request, res: Response): Promise<void> {
     res.status(404).json({ msg: "Usuário não encontrado" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: error });
+    res.status(500).json({ erro: "Ocorreu um erro inesperado" });
   }
 }
 
@@ -100,6 +100,6 @@ export async function login(req: Request, res: Response): Promise<void> {
     res.status(200).json({ msg: "Login bem-sucedido!", token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: error });
+    res.status(500).json({ erro: "Ocorreu um erro inesperado" });
   }
 }
