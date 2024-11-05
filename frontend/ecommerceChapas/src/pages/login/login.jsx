@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importe o hook useNavigate
 import './login.scss';
+import { login } from '../../services/userService';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -38,7 +39,7 @@ const Login = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateEmail(email)) {
@@ -51,8 +52,8 @@ const Login = () => {
             return;
         }
 
-        console.log('Email:', email, 'Password:', password);
-        navigate('/home'); 
+        const data = await login(email, password);
+        console.log(data);
 
         if(email == 'admin@login.com'){
             navigate('/homeAdmin');

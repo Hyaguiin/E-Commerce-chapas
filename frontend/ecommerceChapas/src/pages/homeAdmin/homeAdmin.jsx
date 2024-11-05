@@ -29,17 +29,12 @@ const HomeAdmin = () => {
             >
                 <FaBars className="text-xl" /> 
             </button>
-
-            {/* Barra lateral */}
             <div className={`flex-none w-64 bg-black text-white shadow-lg ${isOpen ? 'block' : 'hidden'} md:block`}>
                 <AdminControll setCurrentComponent={setCurrentComponent} />
             </div>
-
-            {/* Conteúdo principal */}
             <div className="flex-1 p-6">
                 <div className="flex flex-col space-y-6">
                     {renderComponent()}
-                    {/* Adicionando o GridList aqui, se necessário */}
                     <ProductADD />
                 </div>
             </div>
