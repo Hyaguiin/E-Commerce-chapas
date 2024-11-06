@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
 import AdminControll from "../../components/adminControll/admin";
-import BestSelles from "../../components/bestSelles/bestSelles";
+import BestSales from "../../components/bestSales/bestSales";
 import Employer from "../../components/employer/employer";
-import ProductADD from "../../components/productAdd/productAdd";
+import ProductListAdmin from "../../components/productListAdmin/productListAdmin";
 import './homeAdmin.scss';
 
 const HomeAdmin = () => {
@@ -13,16 +13,16 @@ const HomeAdmin = () => {
     const renderComponent = () => {
         switch (currentComponent) {
             case "bestSelles":
-                return <BestSelles />;
+                return <BestSales />;
             case "employer":
                 return <Employer />;
             default:
-                return <BestSelles />;
+                return <BestSales />;
         }
     };
 
     return (
-        <div className="flex h-screen">
+        <div className="flex">
             <button
                 className="md:hidden p-4 bg-black text-white flex items-center"
                 onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +35,7 @@ const HomeAdmin = () => {
             <div className="flex-1 p-6">
                 <div className="flex flex-col space-y-6">
                     {renderComponent()}
-                    <ProductADD />
+                    <ProductListAdmin />
                 </div>
             </div>
         </div>

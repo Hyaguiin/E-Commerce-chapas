@@ -16,7 +16,7 @@ import BestSelles from "./pages/homeAdmin/homeAdmin.jsx";
 import HomeAdmin from "./pages/homeAdmin/homeAdmin.jsx";
 import Contact from "./components/contact/contact.jsx";
 import Employer from "./components/employer/employer.jsx";
-import ProductAdd from "./components/productAdd/productAdd.jsx";
+import ProductAdd from "./components/productListAdmin/productListAdmin.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -92,7 +92,6 @@ function App() {
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
             <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
             <Route path="/homeAdmin" element={<ProtectedRoute><HomeAdmin /></ProtectedRoute>} />
-            <Route path="/bestSelles" element={<ProtectedRoute><BestSelles /></ProtectedRoute>} />
             <Route path="/employer" element={<ProtectedRoute><Employer /></ProtectedRoute>} />
             <Route path="/productAdd" element={<ProtectedRoute><ProductAdd /></ProtectedRoute>} />
           </Routes>

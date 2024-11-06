@@ -5,7 +5,8 @@ export interface Product {
   price: number;
   amount: number;
   description?: string | null;
-  race?: string | null;
+  category: "cavalo" | "whisky" | "charuto";
+  color?: string | null;
   images: string[];
 }
 
@@ -14,7 +15,8 @@ const productSchema = new Schema({
   price: { type: Number, required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: false },
-  race: { type: String, required: false },
+  category: { type: String, enum: ["cavalo", "whisky", "charuto"] },
+  color: { type: String, required: false },
   images: { type: [String] },
 });
 
