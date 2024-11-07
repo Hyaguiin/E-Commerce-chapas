@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { DataSource } from "typeorm";
 import { MONGO_DB_URL, POSTGRES_DB_URL } from "../config/config";
 import { Employee } from "../models/employee-model";
+import { Order } from "../models/order-model";
 
 async function createMongoConnection(): Promise<void> {
   try {
@@ -18,7 +19,7 @@ export const postgresDataSource = new DataSource({
   url: POSTGRES_DB_URL,
   synchronize: true,
   logging: false,
-  entities: [Employee],
+  entities: [Employee, Order],
 });
 
 async function createPostgresConnection(): Promise<void> {
