@@ -4,11 +4,11 @@ import { adminAuth } from "../middleware/admin-validation";
 
 const productRouter = express.Router();
 
-productRouter.use(adminAuth);
-productRouter.post("/product", addProduct);
-productRouter.put("/product/:id", updateProductById);
-productRouter.delete("/product/:id", deleteProductById);
-productRouter.get("/product/:id", getProductById);
-productRouter.get("/product", getAllProducts);
+productRouter.get("/products", getAllProducts);
+productRouter.get("/product/:id", adminAuth, getProductById);
+productRouter.post("/product", adminAuth, addProduct);
+productRouter.put("/product/:id", adminAuth, updateProductById);
+productRouter.delete("/product/:id", adminAuth, deleteProductById);
+
 
 export default productRouter;

@@ -20,6 +20,7 @@ import {
   ChartPieIcon,
 } from '@heroicons/react/24/outline';
 import { useCart } from '../cart/CartContext'; // Ajuste conforme necessário
+import { useAuth } from '../../context/authContext';
 
 const products = [
   { name: 'Cavalos', description: 'Explore our beautiful horses', href: '/cavalos', icon: ChartPieIcon },
@@ -35,10 +36,15 @@ const callsToAction = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { setIsOpen } = useCart(); // Assumindo que isso está funcionando corretamente
+  const { setIsLoggedIn } = useAuth();
 
   const handleCartClick = () => {
     console.log("Cart button clicked!"); // Log para verificar se o botão foi clicado
     setIsOpen(true); // Abre o carrinho
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
   };
 
   return (
@@ -127,7 +133,7 @@ export default function Header() {
           >
             Carrinho
           </button>
-          <a href="/" className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
+          <a onClick={handleLogout} href='/login' className="changecolor ml-6 text-sm font-semibold text-gray-900">Logout <span aria-hidden="true">&rarr;</span></a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} className="lg:hidden">
@@ -196,7 +202,7 @@ export default function Header() {
                 <a href="/profile" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
                   Profile
                 </a>
-                <a href="/login" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
+                <a onClick={handleLogout} href='/login' className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50">
                   Log out
                 </a>
               </div>

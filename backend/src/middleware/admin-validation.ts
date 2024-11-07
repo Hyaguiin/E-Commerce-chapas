@@ -38,7 +38,7 @@ export async function adminAuth(req: Request, res: Response, next: NextFunction)
         return;
       }
 
-      next();
+      return next();
     } else {
       res.status(401).json({ erro: "Token inválido." });
     }

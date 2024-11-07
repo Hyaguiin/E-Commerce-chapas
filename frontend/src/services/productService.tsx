@@ -1,11 +1,11 @@
 import axios from "axios";
-import { PRODUCT_API_URL } from "../constants/apiUrls";
+import { ALL_PRODUCTS_API_URL, PRODUCT_API_URL } from "../constants/apiUrls";
 import { Product } from "../models/productModel";
 
 export async function getAllProducts(): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.get(PRODUCT_API_URL, {
+    const response = await axios.get(ALL_PRODUCTS_API_URL, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

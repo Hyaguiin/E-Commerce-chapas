@@ -12,9 +12,8 @@ const userRouter = express.Router();
 
 userRouter.post("/user/login", login);
 userRouter.post("/user", addUser);
-userRouter.use(adminAuth);
-userRouter.get("/user/:id", getUserById);
-userRouter.put("/user/:id", updateUser);
-userRouter.delete("/user/:id", deleteUser);
+userRouter.get("/user/:id", adminAuth, getUserById);
+userRouter.put("/user/:id", adminAuth, updateUser);
+userRouter.delete("/user/:id", adminAuth, deleteUser);
 
 export default userRouter;
