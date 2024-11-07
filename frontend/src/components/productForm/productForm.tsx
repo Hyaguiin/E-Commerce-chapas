@@ -16,6 +16,7 @@ const ProductForm = ({
     images: [],
     amount: 0,
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Reset form data when selectedProduct changes
@@ -60,6 +61,7 @@ const ProductForm = ({
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     await addProduct(formData);
     setFormData({
@@ -72,6 +74,7 @@ const ProductForm = ({
       amount: 0,
     });
     onProductAdded();
+    setLoading(false);
   };
 
   return (
@@ -79,6 +82,12 @@ const ProductForm = ({
       <h2 className="font-semibold mb-2 text-lg md:text-xl">
         Adicionar Produto
       </h2>
+      {/* Spinner de carregamento */}
+      {loading && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="spinner-border animate-spin rounded-full border-t-4 border-yellow-500 w-16 h-16"></div>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         {/* Nome / Raça */}
         <div className="mb-4">

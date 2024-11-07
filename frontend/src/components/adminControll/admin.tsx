@@ -37,9 +37,10 @@ const AdminControll = ({ setCurrentComponent }: AdminControllProps) => {
           className="logoFacisa" 
           src="https://cdn3d.iconscout.com/3d/premium/thumb/diamante-dourado-10703026-8796428.png" 
           alt="Logo Facisa" 
+          width={64}
         />
         <h1 className='whiteBelt'>
-          White<span className="cor">Belt  <br /> admin</span>
+          White<span className="cor"> Belt  <br /> admin</span>
         </h1>
       </div>
 

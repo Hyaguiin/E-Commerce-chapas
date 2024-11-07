@@ -1,32 +1,37 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { ReactNode, useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 import { CartProvider } from "./components/cart/CartContext";
-import Login from "./pages/login/login";
-import Home from "./pages/home/home";
-import Register from "./pages/register/register";
-import ProductView from "./components/productView/productView";
-import ChicoView from "./components/productView/chicoView";
-import CavaloList from "./components/productList/cavalo";
-import CharutoList from "./components/productList/charuto";
-import WhiskyList from "./components/productList/whisky";
-import ProfileSettings from "./components/profileSettings/profileSettings";
-import Cart from "./components/cart/cart";
-import HomeAdmin from "./pages/homeAdmin/homeAdmin";
-import Contact from "./components/contact/contact";
-import EmployeeComponent from "./components/employee/employee";
-import ProductAdd from "./components/productListAdmin/productListAdmin";
 import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import Cart from "./components/cart/cart";
+
+// Importação dinâmica (lazy loading) das páginas e componentes
+const Login = lazy(() => import("./pages/login/login"));
+const Home = lazy(() => import("./pages/home/home"));
+const Register = lazy(() => import("./pages/register/register"));
+const ProductView = lazy(() => import("./components/productView/productView"));
+const ChicoView = lazy(() => import("./components/productView/chicoView"));
+const CavaloList = lazy(() => import("./components/productList/cavalo"));
+const CharutoList = lazy(() => import("./components/productList/charuto"));
+const WhiskyList = lazy(() => import("./components/productList/whisky"));
+const ProfileSettings = lazy(() => import("./components/profileSettings/profileSettings"));
+const HomeAdmin = lazy(() => import("./pages/homeAdmin/homeAdmin"));
+const Contact = lazy(() => import("./components/contact/contact"));
+const EmployeeComponent = lazy(() => import("./components/employee/employee"));
+const ProductAdd = lazy(() => import("./components/productListAdmin/productListAdmin"));
 
 function App() {
-  
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
-          <div>
-            <Cart />
+          <Cart />
+          <Suspense fallback={
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+              <div className="spinner-border animate-spin rounded-full border-t-4 border-yellow-500 w-16 h-16"></div>
+            </div>
+          }>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -43,10 +48,10 @@ function App() {
               <Route path="/employee" element={<ProtectedRoute><EmployeeComponent /></ProtectedRoute>} />
               <Route path="/productAdd" element={<ProtectedRoute><ProductAdd /></ProtectedRoute>} />
             </Routes>
-          </div>
+          </Suspense>
         </Router>
       </CartProvider>
-    </ AuthProvider>
+    </AuthProvider>
   );
 }
 
