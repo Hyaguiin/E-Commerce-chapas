@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-import { getAllProducts } from '../../services/productService'; // Importe a função para buscar os produtos
+import { getAllProducts } from '../../services/productService';
 import { Product } from '../../models/productModel';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
@@ -32,12 +32,11 @@ const BestSales = () => {
     ],
   };
 
-  // Função para buscar os produtos
   const fetchProducts = async () => {
     try {
       const response = await getAllProducts();
-      setProducts(response.data.slice(0, 4)); // Limita a 5 primeiros produtos
-      setLoading(false); // Finaliza o carregamento
+      setProducts(response.data.slice(0, 4));
+      setLoading(false);
     } catch (error) {
       console.error('Erro ao buscar produtos:', error);
       setLoading(false);
@@ -45,7 +44,7 @@ const BestSales = () => {
   };
 
   useEffect(() => {
-    fetchProducts(); // Chama a função para buscar os produtos ao montar o componente
+    fetchProducts();
   }, []);
 
   return (
@@ -63,12 +62,11 @@ const BestSales = () => {
         </div>
       </div>
 
-      {/* Lista dos 5 primeiros produtos */}
       <div className="col-span-2 mt-6">
-        <h2 className="text-2xl font-bold mb-4">4 Primeiros Produtos</h2>
+        <h2 className="text-2xl font-bold mb-4">Melhores vendas</h2>
 
         {loading ? (
-          <div>Carregando...</div> // Exibe um texto de carregamento enquanto os dados são recuperados
+          <div>Carregando...</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
