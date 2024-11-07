@@ -7,6 +7,27 @@ import Pagination from '../pagination/pagination';
 export default function ProductList({ products }) {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12; // Total de produtos por página
+
+  // Verifica se há produtos
+  if (!products || products.length === 0) {
+    return (
+      <>
+        <Header />
+        <div className="bg-white">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900">Produtos Recomendados</h2>
+
+            {/* Mensagem de no products */}
+            <div className="mt-6 text-center text-lg font-medium text-gray-700">
+              Não há produtos disponíveis no momento.
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   // Obtenha os produtos a serem exibidos na página atual

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
 import AdminControll from "../../components/adminControll/admin";
 import BestSales from "../../components/bestSales/bestSales";
-import Employer from "../../components/employer/employer";
+import EmployeeComponent from "../../components/employee/employee";
 import ProductListAdmin from "../../components/productListAdmin/productListAdmin";
 import AddProductComponent from "../../components/addProduct/addProduct"; 
 import './homeAdmin.scss';
@@ -15,8 +15,8 @@ const HomeAdmin = () => {
     switch (currentComponent) {
       case "bestSales":
         return <BestSales />;
-      case "employer":
-        return <Employer />;
+      case "employee":
+        return <EmployeeComponent />;
       case "productList":
         return (
           <>

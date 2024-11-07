@@ -72,8 +72,8 @@ const AdminControll = ({ setCurrentComponent }: AdminControllProps) => {
           </li>
           <li className="my-2">
             <button
-              className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'employer' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
-              onClick={() => handleSetActive('employer')}
+              className={`flex items-center px-4 py-2 rounded-lg transition duration-200 ${active === 'employee' ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
+              onClick={() => handleSetActive('employee')}
             >
               <UserIcon className="h-6 w-6 mr-3" />
               Funcionários

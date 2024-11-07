@@ -14,7 +14,7 @@ import ProfileSettings from "./components/profileSettings/profileSettings";
 import Cart from "./components/cart/cart";
 import HomeAdmin from "./pages/homeAdmin/homeAdmin";
 import Contact from "./components/contact/contact";
-import Employer from "./components/employer/employer";
+import EmployeeComponent from "./components/employee/employee";
 import ProductAdd from "./components/productListAdmin/productListAdmin";
 import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
@@ -40,7 +40,7 @@ function App() {
               <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
               <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
               <Route path="/homeAdmin" element={<ProtectedRoute><HomeAdmin /></ProtectedRoute>} />
-              <Route path="/employer" element={<ProtectedRoute><Employer /></ProtectedRoute>} />
+              <Route path="/employee" element={<ProtectedRoute><EmployeeComponent /></ProtectedRoute>} />
               <Route path="/productAdd" element={<ProtectedRoute><ProductAdd /></ProtectedRoute>} />
             </Routes>
           </div>

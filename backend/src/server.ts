@@ -13,9 +13,9 @@ app.use(cors());
 
 app.listen(3000, () => console.log("Server running on port 3000"));
 
+app.use(employeeRouter);
 app.use(productRouter);
 app.use(userRouter);
-app.use(employeeRouter);
 
 app.get("/", (req, res) => {
   res.send("Olá mundo!");
