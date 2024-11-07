@@ -15,7 +15,7 @@ const productSchema = new Schema({
   price: { type: Number, required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: false },
-  category: { type: String, enum: ["cavalo", "whisky", "charuto"] },
+  category: { type: String, enum: ["cavalo", "whisky", "charuto"], required: true },
   color: { type: String, required: false },
   images: { type: [String] },
 });
