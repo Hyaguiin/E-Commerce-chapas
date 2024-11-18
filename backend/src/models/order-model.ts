@@ -1,16 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { OrderItem } from "./order-item-model";
 
 export interface OrderModel {
   user_name: string;
   user_email: string;
   order_date?: Date;
   total_amount: number;
-  order_items: {
-    product_id: string;
-    quantity: number;
-    price: number;
-    product_name: string;
-  }[];
+  order_items: OrderItem[];
 }
 
 @Entity("orders")
@@ -31,10 +27,5 @@ export class Order implements OrderModel {
   total_amount!: number;
 
   @Column("jsonb")
-  order_items!: {
-    product_id: string;
-    quantity: number;
-    price: number;
-    product_name: string;
-  }[];
+  order_items!: OrderItem[];
 }

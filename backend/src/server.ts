@@ -6,6 +6,7 @@ import productRouter from "./routers/product-routes";
 import cors from "cors";
 import employeeRouter from './routers/employee-routes';
 import orderRouter from './routers/order-routes';
+import cartRouter from './routers/cart-routes';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(employeeRouter);
 app.use(productRouter);
 app.use(userRouter);
 app.use(orderRouter);
+app.use(cartRouter);
 
 app.get("/", (req, res) => {
   res.send("Olá mundo!");
