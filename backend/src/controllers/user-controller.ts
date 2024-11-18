@@ -45,7 +45,8 @@ export async function getUserById(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     if (id) {
-      const response = await findUserById(id);
+      const numericId = Number(id);
+      const response = await findUserById(numericId);
       if (response) {
         res.status(200).json({ msg: "Usuário encontrado", data: response });
         return;
@@ -63,7 +64,8 @@ export async function updateUser(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const user: User = req.body;
     if (id && user) {
-      const response = await updateUserById(id, user);
+      const numericId = Number(id);
+      const response = await updateUserById(numericId, user);
       if (response) {
         res.status(200).json({ msg: "Usuário atualizado", data: response });
         return;
@@ -80,7 +82,8 @@ export async function deleteUser(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     if (id) {
-      const response = await delteUserById(id);
+      const numericId = Number(id);
+      const response = await delteUserById(numericId);
       if (response) {
         res.status(200).json({ msg: "Usuário excluído", data: response });
         return;
@@ -102,7 +105,7 @@ export async function login(req: Request, res: Response): Promise<void> {
       return;
     }
 
-    const token = await authLogin(user._id, user.email, user.role);
+    const token = await authLogin(user.id, user.email, user.role);
     res.status(200).json({ msg: "Login bem-sucedido!", token });
   } catch (error) {
     console.error(error);

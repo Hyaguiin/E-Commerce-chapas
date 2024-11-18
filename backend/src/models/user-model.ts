@@ -1,24 +1,40 @@
-import { Document, Schema, model } from "mongoose";
-import { Address, addressSchema } from "./address-model";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Address, IAddress } from "./address-model";
 
-export interface User extends Document {
+export interface IUser {
+  id?: number;
   name: string;
   email: string;
   cpf: string;
   password: string;
-  address: Address;
+  address: IAddress[];
   role: "admin" | "user";
   age: number;
 }
 
-const userSchema = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  cpf: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  address: { type: addressSchema, required: true },
-  role: { type: String, enum: ["admin", "user"], required: true },
-  age: { type: Number, required: true },
-});
+@Entity("user")
+export class User implements IUser {
+  @PrimaryGeneratedColumn()
+  id?: number;
 
-export const UserModel = model("User", userSchema);
+  @Column({ type: "varchar", length: 255 })
+  name!: string;
+
+  @Column({ type: "varchar", length: 255 })
+  email!: string;
+
+  @Column({ type: "varchar", length: 11 })
+  cpf!: string;
+
+  @Column({ type: "varchar", length: 255 })
+  password!: string;
+
+  @OneToMany(() => Address, (address) => address.user, { cascade: true })
+  address!: Address[];
+
+  @Column({ type: "enum", enum: ["admin", "user"] })
+  role!: "admin" | "user";
+
+  @Column("int")
+  age!: number;
+}

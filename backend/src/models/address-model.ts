@@ -1,22 +1,46 @@
-import { Schema } from "mongoose";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./user-model";
 
-export interface Address {
+export interface IAddress {
   country: string;
   state: string;
   city: string;
   street: string;
   number: number;
   zipCode: number;
+  user_id?: number;
 }
 
-export const addressSchema = new Schema(
-  {
-    country: { type: String, required: true },
-    state: { type: String, required: true },
-    city: { type: String, required: true },
-    street: { type: String, required: true },
-    number: { type: Number, required: true },
-    zipCode: { type: Number, required: true },
-  },
-  { _id: false }
-);
+@Entity("address")
+export class Address implements IAddress {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column({ type: "varchar", length: 56 })
+  country!: string;
+
+  @Column({ type: "varchar", length: 50 })
+  state!: string;
+
+  @Column({ type: "varchar", length: 255 })
+  city!: string;
+
+  @Column({ type: "varchar", length: 255 })
+  street!: string;
+
+  @Column({ type: "int" })
+  number!: number;
+
+  @Column({ type: "int" })
+  zipCode!: number;
+
+  @ManyToOne(() => User, (user) => user.address)
+  @JoinColumn()
+  user!: User;
+}
