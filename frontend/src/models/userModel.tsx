@@ -1,11 +1,11 @@
 import { Address } from "./addressModel";
 
-export interface User extends Document {
+export interface User {
   name: string;
   email: string;
   cpf: string;
   password: string;
-  address: Address;
+  address: Address[];
   role: "admin" | "user";
   age: number;
 }

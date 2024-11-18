@@ -22,6 +22,7 @@ export async function register(user: User): Promise<any> {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error
   }
 }
 

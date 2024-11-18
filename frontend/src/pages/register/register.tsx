@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { FormEvent, SyntheticEvent, useState } from "react";
 import "./register.scss";
 import { register } from "../../services/userService";
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
+import { Address } from "../../models/addressModel";
+import { User } from "../../models/userModel";
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   // Existing state variables
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [cpf, setCpf] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
 
   // New state variables for address
   const [address, setAddress] = useState({
@@ -37,24 +41,25 @@ const Register = () => {
     state: "",
     city: "",
     street: "",
-    number: "",
-    zipCode: "",
+    number: 0,
+    zipCode: 0,
   });
 
   // Validation functions
-  const validateEmail = (email) => {
+  const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
-  const validateName = (name) => /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(name);
-  const validateCpf = (cpf) => /^\d{11}$/.test(cpf); // 11 dígitos
-  const validatePassword = (password) => password.length >= 8;
+  const validateName = (name: string) => /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(name);
+  const validateCpf = (cpf: string) => /^\d{11}$/.test(cpf); // 11 dígitos
+  const validatePassword = (password: string) => password.length >= 8;
 
   // Address validation functions
-  const validateAddressField = (field) => field.length > 0;
+  const validateAddressField = (field: string | number) =>
+    typeof field === "string" ? field.length > 0 : field > 0;
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
     if (!validateEmail(value)) {
@@ -64,9 +69,9 @@ const Register = () => {
     }
   };
 
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setName(value);
+    setFirstName(value);
     if (!validateName(value)) {
       setNameError("Nome deve conter apenas letras");
     } else {
@@ -74,7 +79,7 @@ const Register = () => {
     }
   };
 
-  const handleSurnameChange = (e) => {
+  const handleSurnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSurname(value);
     if (!validateName(value)) {
@@ -84,7 +89,7 @@ const Register = () => {
     }
   };
 
-  const handleCpfChange = (e) => {
+  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ""); // Remove everything that is not a number
     setCpf(value);
     if (!validateCpf(value)) {
@@ -94,8 +99,8 @@ const Register = () => {
     }
   };
 
-  const handleAgeChange = (e) => {
-    const value = e.target.value;
+  const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value: number = Number(e.target.value);
     setAge(value);
     if (value && value < 18) {
       setAgeError("Você deve ter 18 anos ou mais");
@@ -105,7 +110,7 @@ const Register = () => {
   };
 
   // Address input change handlers
-  const handleAddressChange = (e) => {
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
 
@@ -122,7 +127,7 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Validação dos campos
@@ -131,7 +136,7 @@ const Register = () => {
       return;
     }
 
-    if (!validateName(name)) {
+    if (!validateName(firstName)) {
       setNameError("Nome deve conter apenas letras");
       return;
     }
@@ -165,7 +170,7 @@ const Register = () => {
 
     // Validate address fields
     for (const key in address) {
-      if (!validateAddressField(address[key])) {
+      if (!validateAddressField(address[key as keyof Address])) {
         setAddressError((prev) => ({
           ...prev,
           [key]: `${key.charAt(0).toUpperCase() + key.slice(1)} é obrigatório.`,
@@ -175,26 +180,33 @@ const Register = () => {
     }
 
     // Unifying all information into registerPayload
-    const registerPayload = {
+    const name = `${firstName} ${surname}`;
+    const registerPayload: User = {
       name,
-      surname,
       email,
       password,
       cpf,
       age,
-      address: {
-        country: address.country,
-        state: address.state,
-        city: address.city,
-        street: address.street,
-        number: address.number,
-        zipCode: address.zipCode,
-      },
-      role: "user"
+      address: [
+        {
+          country: address.country,
+          state: address.state,
+          city: address.city,
+          street: address.street,
+          number: Number(address.number),
+          zipCode: Number(address.zipCode),
+        },
+      ],
+      role: "user",
     };
 
-    // Assuming you have a function to handle the registration logic
-    await register(registerPayload);
+    try {
+      await register(registerPayload);
+      toast.success("Cadastro realizado com sucesso!");  // Show success toast
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.erro || "Erro ao realizar o cadastro."; 
+      toast.error(errorMessage);  // Show error toast
+    }
   };
 
   return (
@@ -222,7 +234,7 @@ const Register = () => {
                 id="nome"
                 type="text"
                 placeholder="Nome"
-                value={name}
+                value={firstName}
                 onChange={handleNameChange}
                 required
               />
@@ -439,6 +451,7 @@ const Register = () => {
           alt="Exemplo Grife"
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };
