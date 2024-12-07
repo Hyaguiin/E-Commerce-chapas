@@ -1,0 +1,11 @@
+.header{
+   
+   box-shadow: none !important;
+}
+
+   .changecolor {
+      &:hover {
+      color: #E8CA05;
+      cursor: pointer;
+      }
+   }
