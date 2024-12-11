@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'; // Inclua useState e useEffect
-import Header from '../../components/header/header.jsx';
-import AboutUs from '../../components/aboutUs/aboutUs.jsx';
-import Footer from '../../components/footer/footer.jsx';
+import React, { useState, useEffect } from "react"; // Inclua useState e useEffect
+import Header from "../../components/header/header.jsx";
+import AboutUs from "../../components/aboutUs/aboutUs.jsx";
+import Footer from "../../components/footer/footer.jsx";
+import "./home.scss";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong with the Header.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }
 

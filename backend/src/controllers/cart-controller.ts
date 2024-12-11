@@ -48,8 +48,8 @@ export async function updateItemInCart(req: Request, res: Response): Promise<voi
         const userId = Number(req.params.userId);
         const { product_id, quantity } = req.body;
 
-        if (!product_id || quantity <= 0) {
-            res.status(400).json({ msg: "Produto e quantidade são obrigatórios e quantidade deve ser maior que 0." });
+        if (!product_id || !quantity) {
+            res.status(400).json({ msg: "Produto e quantidade são obrigatórios." });
             return;
         }
 

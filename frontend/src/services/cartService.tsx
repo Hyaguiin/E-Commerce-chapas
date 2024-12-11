@@ -6,7 +6,7 @@ import { OrderItem } from "../models/orderItem";
 export async function fetchCart(userId: string): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.get(`${CART_API_URL}/cart/${userId}`, {
+    const response = await axios.get(`${CART_API_URL}/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,7 +21,7 @@ export async function fetchCart(userId: string): Promise<any> {
 export async function addItemToCart(userId: string, product: OrderItem): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.post(`${CART_API_URL}/cart/${userId}/add`, product, {
+    const response = await axios.post(`${CART_API_URL}/${userId}/add`, product, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -33,10 +33,10 @@ export async function addItemToCart(userId: string, product: OrderItem): Promise
 }
 
 // Função para atualizar item no carrinho
-export async function updateItemInCart(userId: string, product: OrderItem): Promise<any> {
+export async function updateItemInCart(userId: string, product: Partial<OrderItem>): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.put(`${CART_API_URL}/cart/${userId}/update`, product, {
+    const response = await axios.put(`${CART_API_URL}/${userId}/update`, product, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -48,11 +48,11 @@ export async function updateItemInCart(userId: string, product: OrderItem): Prom
 }
 
 // Função para remover item do carrinho
-export async function removeItemFromCart(userId: string, productId: string): Promise<any> {
+export async function removeItemFromCart(userId: string, product_id: string): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.delete(`${CART_API_URL}/cart/${userId}/remove`, {
-      data: { productId },
+    const response = await axios.delete(`${CART_API_URL}/${userId}/remove`, {
+      data: { product_id },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,7 +67,7 @@ export async function removeItemFromCart(userId: string, productId: string): Pro
 export async function clearUserCart(userId: string): Promise<any> {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.delete(`${CART_API_URL}/cart/${userId}/clear`, {
+    const response = await axios.delete(`${CART_API_URL}/${userId}/clear`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

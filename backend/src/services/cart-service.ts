@@ -22,22 +22,35 @@ export async function addItemToCart(userId: number, product: OrderItem): Promise
   const cart = await redisCart.getCartByUserId(userId);
 
   if (!cart) {
+    // Criar um novo carrinho se não existir
     const newCart: ShoppingCart = {
       items: [product],
       totalPrice: product.price * product.quantity,
     };
     await redisCart.setCart(userId, newCart);
   } else {
+    // Verificar se o produto já existe no carrinho
     const existingProductIndex = cart.items.findIndex(item => item.product_id === product.product_id);
 
     if (existingProductIndex > -1) {
+      // Atualizar a quantidade do produto existente
       cart.items[existingProductIndex].quantity += product.quantity;
+
+      // Remover o item se a quantidade for <= 0
+      if (cart.items[existingProductIndex].quantity <= 0) {
+        cart.items.splice(existingProductIndex, 1);
+      }
     } else {
-      cart.items.push(product);
+      // Adicionar o novo produto ao carrinho
+      if (product.quantity > 0) {
+        cart.items.push(product);
+      }
     }
 
+    // Recalcular o preço total
     cart.totalPrice = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+    // Atualizar o carrinho no Redis
     await redisCart.setCart(userId, cart);
   }
 }
