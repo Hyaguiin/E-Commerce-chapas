@@ -5,7 +5,20 @@ import Footer from '../footer/footer';
 import Pagination from '../pagination/pagination';
 import { addItemToCart } from '../../services/cartService'; // Certifique-se de que o caminho está correto
 
-export default function ProductList({ products }) {
+interface Product {
+  id: string;
+  name: string;
+  color: string;
+  price: number;
+  images: string[]; // Deve ser um array de strings contendo as URLs das imagens
+  href: string;
+}
+
+interface ProductListProps {
+  products: Product[];
+}
+
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12; // Total de produtos por página
 
@@ -17,8 +30,6 @@ export default function ProductList({ products }) {
         <div className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900">Produtos Recomendados</h2>
-
-            {/* Mensagem de no products */}
             <div className="mt-6 text-center text-lg font-medium text-gray-700">
               Não há produtos disponíveis no momento.
             </div>
@@ -36,36 +47,35 @@ export default function ProductList({ products }) {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const handleAddToCart = async (product) => {
-    // Pegando o ID do usuário do localStorage
+  const handleAddToCart = async (product: Product) => {
     const userId = localStorage.getItem('userId');
     
-    // Verificando se o userId existe
-    if (userId) {
-      const productData = {
-        id: product.id,         // ID do produto
-        name: product.name,     // Nome do produto
-        quantity: 1,            // Quantidade sempre 1
-        price: product.price,   // Preço do produto
-      };
-      
-      try {
-        const result = await addItemToCart(userId, productData); // Chama o serviço para adicionar ao carrinho
-        if (result) {
-          alert("Produto adicionado ao carrinho!");
-        } else {
-          alert("Erro ao adicionar produto ao carrinho.");
-        }
-      } catch (error) {
-        console.error("Erro ao adicionar item ao carrinho:", error);
-        alert("Houve um erro ao adicionar o produto ao carrinho.");
-      }
-    } else {
+    if (!userId) {
       alert("Usuário não autenticado.");
+      return; // Interrompe a execução se o usuário não estiver autenticado
+    }
+
+    const productData = {
+      id: product.id,         
+      name: product.name,     
+      quantity: 1,            
+      price: product.price,   
+    };
+
+    try {
+      const result = await addItemToCart(userId, productData);
+      if (result) {
+        alert("Produto adicionado ao carrinho!");
+      } else {
+        alert("Erro ao adicionar produto ao carrinho.");
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar item ao carrinho:", error);
+      alert("Houve um erro ao adicionar o produto ao carrinho.");
     }
   };
 
@@ -80,9 +90,10 @@ export default function ProductList({ products }) {
             {currentProducts.map((product) => (
               <div key={product.id} className="group relative border border-gray-300 rounded-md p-4 shadow-md hover:shadow-lg">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                  {/* Verificar se a URL da imagem está correta */}
                   <img
                     alt={product.name + " image"}
-                    src={product.images[0]}
+                    src={product.images[0] || '/path/to/default-image.jpg'} // Coloque uma imagem padrão se não houver imagem
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
                 </div>
@@ -101,8 +112,8 @@ export default function ProductList({ products }) {
                 {/* Botão Adicionar ao Carrinho */}
                 <div className="mt-4 flex justify-center">
                   <button
-                    onClick={() => handleAddToCart(product)} // Chamando a função ao clicar no botão
-                    className="w-full bg-yellow-500 text-white font-medium text-sm rounded-md px-6 py-3 hover:bg-yellow-600 transition duration-300"
+                    onClick={() => handleAddToCart(product)}
+                    className="w-full text-white font-medium text-sm rounded-md px-6 py-3 transition duration-300 ease-in-out bg-[#E8CA05] border border-[#D6B205] hover:bg-black hover:text-yellow-400 relative z-10"
                   >
                     Adicionar ao Carrinho
                   </button>
@@ -111,7 +122,6 @@ export default function ProductList({ products }) {
             ))}
           </div>
 
-          {/* Componente de Paginação */}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
@@ -122,4 +132,6 @@ export default function ProductList({ products }) {
       <Footer />
     </>
   );
-}
+};
+
+export default ProductList;
