@@ -13,7 +13,7 @@ const userRouter = express.Router();
 userRouter.post("/user/login", login);
 userRouter.post("/user", addUser);
 userRouter.get("/user/:id", adminAuth, getUserById);
-userRouter.put("/user/:id", adminAuth, updateUser);
+userRouter.put("/user/:id", updateUser);
 userRouter.delete("/user/:id", adminAuth, deleteUser);
 
 export default userRouter;

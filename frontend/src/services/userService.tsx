@@ -2,7 +2,7 @@ import axios from "axios";
 import { USER_API_URL, LOGIN_API_URL } from "../constants/apiUrls";
 import { User } from "../models/userModel";
 
-export async function getUserById(userId: string): Promise<User | undefined> {
+export async function getUserById(userId: number): Promise<User | undefined> {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${USER_API_URL}/${userId}`, {
@@ -38,5 +38,30 @@ export async function login(email: string, password: string): Promise<any> {
     return response.data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function editUserProfile(userId: string, updatedUser: Partial<User>): Promise<any> {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Token de autenticação não encontrado.");
+    }
+
+    const response = await axios.put(
+      `${USER_API_URL}/${userId}`,
+      updatedUser,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao editar perfil:", error);
+    throw error;
   }
 }
