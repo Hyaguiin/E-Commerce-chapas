@@ -3,6 +3,7 @@ import '../../components/productList/productList.scss';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Pagination from '../pagination/pagination';
+import { addItemToCart } from '../../services/cartService'; // Certifique-se de que o caminho está correto
 
 export default function ProductList({ products }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,6 +40,35 @@ export default function ProductList({ products }) {
     setCurrentPage(page);
   };
 
+  const handleAddToCart = async (product) => {
+    // Pegando o ID do usuário do localStorage
+    const userId = localStorage.getItem('userId');
+    
+    // Verificando se o userId existe
+    if (userId) {
+      const productData = {
+        id: product.id,         // ID do produto
+        name: product.name,     // Nome do produto
+        quantity: 1,            // Quantidade sempre 1
+        price: product.price,   // Preço do produto
+      };
+      
+      try {
+        const result = await addItemToCart(userId, productData); // Chama o serviço para adicionar ao carrinho
+        if (result) {
+          alert("Produto adicionado ao carrinho!");
+        } else {
+          alert("Erro ao adicionar produto ao carrinho.");
+        }
+      } catch (error) {
+        console.error("Erro ao adicionar item ao carrinho:", error);
+        alert("Houve um erro ao adicionar o produto ao carrinho.");
+      }
+    } else {
+      alert("Usuário não autenticado.");
+    }
+  };
+
   return (
     <>
       <Header />
@@ -67,6 +97,15 @@ export default function ProductList({ products }) {
                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">R${product.price}</p>
+                </div>
+                {/* Botão Adicionar ao Carrinho */}
+                <div className="mt-4 flex justify-center">
+                  <button
+                    onClick={() => handleAddToCart(product)} // Chamando a função ao clicar no botão
+                    className="w-full bg-yellow-500 text-white font-medium text-sm rounded-md px-6 py-3 hover:bg-yellow-600 transition duration-300"
+                  >
+                    Adicionar ao Carrinho
+                  </button>
                 </div>
               </div>
             ))}
