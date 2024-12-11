@@ -1,10 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../header/header';
-import { CameraIcon } from '@heroicons/react/24/outline';
 import './profileSettings.scss';
-import { editUserProfile } from '../../services/userService'; // Importe o serviço de atualização de perfil
-import { useEffect } from 'react'; // Para carregar dados iniciais
-import { getUserById } from '../../services/userService'; // Para carregar os dados do usuário
+import { editUserProfile, getUserById } from '../../services/userService'; // Importe os serviços
 
 export default function ProfileSettings() {
   const [name, setName] = useState('');
@@ -12,24 +9,24 @@ export default function ProfileSettings() {
   const [address, setAddress] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
   const [localProfileImage, setLocalProfileImage] = useState(null);
-  const [profileImage, setProfileImage] = useState('');
-  
+
   // Estados para mensagens de erro
   const [emailError, setEmailError] = useState('');
   const [nameError, setNameError] = useState('');
   const [addressError, setAddressError] = useState('');
   const [houseNumberError, setHouseNumberError] = useState('');
 
-  // Carregue dados iniciais do usuário
+  // Carregar dados iniciais do usuário
   useEffect(() => {
     const loadUserData = async () => {
       try {
-        const user = JSON.parse(localStorage.getItem("user")); // Substitua pelo ID do usuário real, talvez obtido via contexto ou autenticação
-        console.log(user.id)
+        const user = JSON.parse(localStorage.getItem("user")); // Obtém o ID do usuário
         const userData = await getUserById(user.id);
         if (userData) {
           setName(userData.name);
           setEmail(userData.email);
+          setAddress(userData.address || '');  // Defina o valor do endereço, se disponível
+          setHouseNumber(userData.houseNumber || '');  // Defina o valor do número da casa, se disponível
         }
       } catch (error) {
         console.error("Erro ao carregar os dados do usuário:", error);
@@ -55,21 +52,29 @@ export default function ProfileSettings() {
     }
   };
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Verificação de campos obrigatórios
     if (!name) setNameError('Nome é obrigatório');
     if (!email || emailError) setEmailError('E-mail é obrigatório e deve estar no formato correto');
+    if (!address) setAddressError('Endereço é obrigatório');
+    if (!houseNumber) setHouseNumberError('Número da casa é obrigatório');
 
-    if (name && validateEmail(email)) {
+    if (name && validateEmail(email) && address && houseNumber) {
       try {
-        const user = JSON.parse(localStorage.getItem("user")); // Substitua pelo ID do usuário real, talvez obtido via contexto ou autenticação
+        const user = JSON.parse(localStorage.getItem("user"));
+        
+        // Verificando o ID do usuário antes da requisição
+        console.log("ID do usuário:", user.id); // Aqui está a verificação do ID
+
         const updatedUser = {
           name,
           email,
+          address,
+          houseNumber,
         };
+        
         const response = await editUserProfile(user.id, updatedUser);
         console.log("Perfil atualizado com sucesso:", response);
         alert("Perfil atualizado com sucesso!");
@@ -105,7 +110,7 @@ export default function ProfileSettings() {
               placeholder="Seu Nome"
               required
             />
-            {nameError && <p className="error-message">{nameError}</p>} {/* Mensagem de erro em vermelho */}
+            {nameError && <p className="error-message">{nameError}</p>}
           </div>
           <div className="profile-input-group">
             <label>Email:</label>
@@ -116,7 +121,35 @@ export default function ProfileSettings() {
               placeholder="Email@exemplo.com.br"
               required
             />
-            {emailError && <p className="error-message">{emailError}</p>} {/* Mensagem de erro em vermelho */}
+            {emailError && <p className="error-message">{emailError}</p>}
+          </div>
+          <div className="profile-input-group">
+            <label>Endereço:</label>
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => {
+                setAddress(e.target.value);
+                setAddressError(''); // Limpa o erro ao digitar
+              }}
+              placeholder="Seu Endereço"
+              required
+            />
+            {addressError && <p className="error-message">{addressError}</p>}
+          </div>
+          <div className="profile-input-group">
+            <label>Número da Casa:</label>
+            <input
+              type="text"
+              value={houseNumber}
+              onChange={(e) => {
+                setHouseNumber(e.target.value);
+                setHouseNumberError(''); // Limpa o erro ao digitar
+              }}
+              placeholder="Número da Casa"
+              required
+            />
+            {houseNumberError && <p className="error-message">{houseNumberError}</p>}
           </div>
           <button type="submit" className="profile-save-button">Salvar</button>
         </form>
