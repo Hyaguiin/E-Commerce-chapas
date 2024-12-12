@@ -23,7 +23,7 @@ export async function adminAuth(req: Request, res: Response, next: NextFunction)
     const decodedToken = jwt.verify(token, JWT_SECRET);
 
     if (typeof decodedToken === "object" && "id" in decodedToken) {
-      const id: string = decodedToken.id;
+      const id: number = decodedToken.id;
       const user: User | null = await findUserById(id);
 
       if (!user) {

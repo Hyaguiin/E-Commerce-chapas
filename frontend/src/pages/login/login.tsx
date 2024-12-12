@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importe o hook useNavigate
 import "./login.scss";
-import { login } from "../../services/userService";
 import { useAuth } from "../../context/authContext";
+import { User } from "../../models/userModel";
+import { getUserById } from "../../services/userService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const { setIsLoggedIn } = useAuth();
+  const { userLogin } = useAuth();
 
   const navigate = useNavigate(); // Inicialize o hook de navegação
 
@@ -18,7 +19,7 @@ const Login = () => {
     return regex.test(email);
   };
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: any) => {
     const value = e.target.value;
     setEmail(value);
     if (!validateEmail(value)) {
@@ -30,7 +31,7 @@ const Login = () => {
 
   const validatePassword = (password: string) => password.length >= 8;
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: any) => {
     const value = e.target.value;
     setPassword(value);
     if (!validatePassword(value)) {
@@ -40,7 +41,7 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
@@ -53,11 +54,17 @@ const Login = () => {
       return;
     }
 
-    const data = await login(email, password);
-    console.log(data.msg);
-    if (data.msg === "Login bem-sucedido!") {
-      setIsLoggedIn(true);
-      navigate("/");
+    try {
+      await userLogin(email, password);
+      const token = localStorage.getItem("token");
+      const decodedToken =
+        token !== null ? JSON.parse(atob(token.split(".")[1])) : "";
+      const user = await getUserById(decodedToken.id);
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/"); // Redireciona para a página inicial
+    } catch (error) {
+      console.error("Erro durante o login:", error);
+      alert("Falha no login. Verifique suas credenciais e tente novamente.");
     }
   };
 
@@ -72,7 +79,6 @@ const Login = () => {
               alt="Logo WhiteBelt"
             />
             <h1 className="login-whiteBelt">
-              {" "}
               White <span className="login-cor"> Belt</span>
             </h1>
           </div>

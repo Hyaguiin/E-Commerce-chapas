@@ -123,34 +123,6 @@ export default function ProfileSettings() {
             />
             {emailError && <p className="error-message">{emailError}</p>}
           </div>
-          <div className="profile-input-group">
-            <label>Endereço:</label>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-                setAddressError(''); // Limpa o erro ao digitar
-              }}
-              placeholder="Seu Endereço"
-              required
-            />
-            {addressError && <p className="error-message">{addressError}</p>}
-          </div>
-          <div className="profile-input-group">
-            <label>Número da Casa:</label>
-            <input
-              type="text"
-              value={houseNumber}
-              onChange={(e) => {
-                setHouseNumber(e.target.value);
-                setHouseNumberError(''); // Limpa o erro ao digitar
-              }}
-              placeholder="Número da Casa"
-              required
-            />
-            {houseNumberError && <p className="error-message">{houseNumberError}</p>}
-          </div>
           <button type="submit" className="profile-save-button">Salvar</button>
         </form>
       </div>

@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { USER_API_URL, LOGIN_API_URL } from "../constants/apiUrls";
-import { User } from "../models/userModel";
+import { User, LoginResponse } from "../models/userModel";
 
 export async function getUserById(userId: number): Promise<User | undefined> {
   try {
@@ -26,7 +26,7 @@ export async function register(user: User): Promise<any> {
   }
 }
 
-export async function login(email: string, password: string): Promise<any> {
+export async function login(email: string, password: string): Promise<LoginResponse | null> {
   try {
     const payload = {
       email: email,
@@ -35,9 +35,10 @@ export async function login(email: string, password: string): Promise<any> {
     const response = await axios.post(LOGIN_API_URL, payload);
     const token = response.data.token;
     localStorage.setItem("token", token);
-    return response.data;
+    return response.data || null;
   } catch (error) {
     console.error(error);
+    return null
   }
 }
 

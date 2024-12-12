@@ -1,62 +1,79 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { getUserById } from "../services/userService";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { login } from "../services/userService";
 
-interface AuthContextProps {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (loggedIn: boolean) => void;
-}
-
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+// Tipo do contexto
+type AuthContextType = {
+  user: { id: string; email: string; role: string } | null;
+  userLogin: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+  isAuthenticated: boolean;
 };
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-  const checkAuthStatus = async () => {
-    const token = localStorage.getItem("token");
+// Provedor do contexto
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<{
+    id: string;
+    email: string;
+    role: string;
+  } | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    if (token) {
-      const decoded = JSON.parse(atob(token.split(".")[1]));
-      const expirationTime = decoded.exp * 1000;
-      const currentTime = new Date().getTime();
+  // Função para realizar login
+  const userLogin = async (email: string, password: string) => {
+    try {
+      // Utilizando a função de login do service
+      const responseData = await login(email, password);
 
-      if (currentTime < expirationTime) {
-        const user = await getUserById(decoded.id);
-        localStorage.setItem("user", JSON.stringify(user));
-        setIsLoggedIn(true);
-      } else {
-        localStorage.removeItem("token");
-        setIsLoggedIn(false);
-      }
-    } else {
-      setIsLoggedIn(false);
+      // Decodificar o token para obter os dados do usuário
+      const decodedToken = (responseData !== null) ? JSON.parse(atob(responseData.token.split(".")[1])) : "";
+
+      // Atualizar estado do usuário
+      setUser(decodedToken);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error("Erro ao realizar login:", error);
+      throw new Error("Credenciais inválidas");
     }
-    setLoading(false);
   };
 
+  // Função para realizar logout
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
+  // Verificar se o usuário já está autenticado ao carregar o aplicativo
   useEffect(() => {
-    checkAuthStatus();
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        setUser(decodedToken);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("Erro ao decodificar o token:", error);
+        logout();
+      }
+    }
   }, []);
 
-  if (loading) {
-    return (
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-        <div className="spinner-border animate-spin rounded-full border-t-4 border-yellow-500 w-16 h-16"></div>
-      </div>
-    );
-  }
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ user, userLogin, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+// Hook personalizado para usar o contexto
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth deve ser usado dentro de um AuthProvider");
+  }
+  return context;
 };
