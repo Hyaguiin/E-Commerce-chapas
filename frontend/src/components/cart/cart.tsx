@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-} from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { useCart } from "../cart/CartContext";
 import { fetchCart, updateItemInCart, removeItemFromCart, clearUserCart } from "../../services/cartService";
 import { User } from "../../models/userModel";
 import { createOrder } from "../../services/orderService";
-import CartHeader from "./CartHeader"; // Importando o novo componente de cabeçalho
-import CartItem from "./CartItem"; // Importando o componente de item do carrinho
-import CartConfirmation from "./CartConfirmation"; // Importando o componente de confirmação
-import CartActions from "./CartActions"; // Importando o componente de ações do carrinho
+import CartHeader from "./CartHeader";
+import CartItem from "./CartItem";
+import CartConfirmation from "./CartConfirmation";
+import CartActions from "./CartActions";
 
 export default function Cart() {
   const { isOpen, setIsOpen, cartItems, updateCartItems } = useCart();
@@ -83,7 +79,8 @@ export default function Cart() {
           });
           setShowConfirmation(true);
           handleClearCart();
-          setIsOpen(false);
+          // Mova esta linha para depois da seção de confirmação
+          // setIsOpen(false);
         } else {
           console.error("Falha ao criar o pedido: ", response);
         }
@@ -98,41 +95,52 @@ export default function Cart() {
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-10">
       <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75" />
-      {showConfirmation && <CartConfirmation orderData={orderData} setShowConfirmation={setShowConfirmation} />}
+      {/* Move `Dialog` para sua própria seção */}
+      {showConfirmation && (
+        <CartConfirmation orderData={orderData} setShowConfirmation={(show) => {
+          setShowConfirmation(show);
+          if (!show) {
+            setIsOpen(false); // Fechar o modal somente depois que `CartConfirmation` é fechado
+          }
+        }} />
+      )}
 
-      <div className="fixed inset-0 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-            <DialogPanel className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out">
-              <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                  <CartHeader setIsOpen={setIsOpen} />
-                  {cartItems.length === 0 ? (
-                    <div className="text-center text-gray-500">
-                      <p>Seu carrinho está vazio.</p>
-                      <p className="mt-2">
-                        Adicione alguns itens ao carrinho e volte aqui para visualizá-los!
-                      </p>
-                    </div>
-                  ) : (
-                    <ul role="list" className="-my-6 divide-y divide-gray-200">
-                      {cartItems.map((product) => (
-                        <CartItem
-                          key={product.product_id}
-                          product={product}
-                          handleQuantityChange={handleQuantityChange}
-                          handleRemoveItem={handleRemoveItem}
-                        />
-                      ))}
-                    </ul>
-                  )}
+      {!showConfirmation && (
+        <div className="fixed inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+              <DialogPanel className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out">
+                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                    <CartHeader setIsOpen={setIsOpen} />
+                    {cartItems.length === 0 ? (
+                      <div className="text-center text-gray-500">
+                        <p>Seu carrinho está vazio.</p>
+                        <p className="mt-2">
+                          Adicione alguns itens ao carrinho e volte aqui para visualizá-los!
+                        </p>
+                      </div>
+                    ) : (
+                      <ul role="list" className="-my-6 divide-y divide-gray-200">
+                        {cartItems.map((product) => (
+                          <CartItem
+                            key={product.product_id}
+                            product={product}
+                            handleQuantityChange={handleQuantityChange}
+                            handleRemoveItem={handleRemoveItem}
+                          />
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <CartActions handleClearCart={handleClearCart} handleCheckout={handleCheckout} setIsOpen={setIsOpen} />
                 </div>
-                <CartActions handleClearCart={handleClearCart} handleCheckout={handleCheckout} setIsOpen={setIsOpen} />
-              </div>
-            </DialogPanel>
+              </DialogPanel>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      
     </Dialog>
   );
 }
